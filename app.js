@@ -3,3 +3,5 @@
 // initialize state
 
 // set event listeners to update state and DOM
+
+import { players } from './data.js';
