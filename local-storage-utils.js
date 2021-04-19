@@ -1,6 +1,6 @@
 const PLAYERS = 'PLAYERS';
 
-export function setPlayers(players) { // takes player array of objects and sets them in local storage
+export function setPlayers(players) { // takes player object and sets them in local storage
 
     const stringyPlayers = JSON.stringify(players);
 
@@ -8,7 +8,7 @@ export function setPlayers(players) { // takes player array of objects and sets 
 
 }
 
-export function getPlayers() {  // gets local storage and returns array of objects
+export function getPlayers() {  // gets local storage and returns object
 
     const stringyPlayers = localStorage.getItem(PLAYERS);
 
@@ -34,5 +34,9 @@ export function createPlayers(nameOne, nameTwo) {
         isTurn: false,
         diceroll: 0,
     };
-    console.log(playerOne, playerTwo);
+
+    const players = [playerOne, playerTwo];
+
+    setPlayers(players);
+
 }
