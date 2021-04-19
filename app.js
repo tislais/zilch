@@ -10,7 +10,9 @@ const button = document.querySelector('button');
 const inputOne = document.getElementById('player-one-name');
 const inputTwo = document.getElementById('player-two-name');
 
-button.addEventListener('click', () => {
+button.addEventListener('submit', (e) => {
+
+    e.preventDefault();
 
     createPlayers(inputOne.value, inputTwo.value);
 
