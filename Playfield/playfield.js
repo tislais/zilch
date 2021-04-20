@@ -1,5 +1,7 @@
 import { displayScoringOptions } from './score.js';
 import { getPlayers } from '../local-storage-utils.js';
+import diceJS from './dice.js';
+import { bankZero } from './score.js';
 
 // const die1 = document.getElementById('die1');
 // const die2 = document.getElementById('die2');
@@ -13,15 +15,14 @@ const rollButton = document.getElementById('roll-button');
 const player1Name = document.getElementById('player-1-name');
 const player2Name = document.getElementById('player-2-name');
 const bankButton = document.getElementById('bank-button');
-
-import diceJS from './dice.js';
+const playerChoiceDiv = document.getElementById('player-choice');
 
 let dice = diceJS;
 
 player1Name.textContent = getPlayers()[0].name;
-player2Name.textContent = getPlayers()[1].name; 
+player2Name.textContent = getPlayers()[1].name;
 
-const generateRandomNumber = function() {
+const generateRandomNumber = function () {
     return Math.floor((Math.random() * 6) + 1);
 };
 
@@ -34,7 +35,7 @@ function renderDiceValue(array) {
         die.setAttribute('id', arrayitem.id);
         arrayitem.number = generateRandomNumber();
         die.textContent = arrayitem.number;
-        
+
         currentRoll.push(arrayitem.number);
         diceList.append(die);
     }
@@ -59,12 +60,12 @@ function renderDiceValue(array) {
 // }
 
 rollButton.addEventListener('click', () => {
+    playerChoiceDiv.innerHTML = '';
     renderDiceValue(dice);
     displayScoringOptions();
 });
 
-
-
 bankButton.addEventListener('click', () => {
-
-})
+    bankZero();
+    playerChoiceDiv.innerHTML = '';
+});
