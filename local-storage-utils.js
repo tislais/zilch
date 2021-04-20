@@ -25,6 +25,7 @@ export function createPlayers(nameOne, nameTwo) {
         zilches: 0,
         isTurn: true,
         diceroll: 0,
+        turn: true
     };
 
     const playerTwo = {
@@ -33,6 +34,7 @@ export function createPlayers(nameOne, nameTwo) {
         zilches: 0,
         isTurn: false,
         diceroll: 0,
+        turn: false
     };
 
     const players = [playerOne, playerTwo];

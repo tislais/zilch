@@ -1,18 +1,26 @@
 import diceJS from './dice.js';
 
+import { disableRoll } from './playfield.js';
+
+import { getPlayers } from '../local-storage-utils.js';
+
 const playerChoiceDiv = document.getElementById('player-choice');
 
 const bankButton = document.getElementById('bank-button');
 
+const rollButton = document.getElementById('roll-button');
+
 export function displayScoringOptions() {
+
     const diceArray = diceJS;
 
-    const onesObject = diceArray.filter(dice => dice.number === 1);
-    const twosObject = diceArray.filter(dice => dice.number === 2);
-    const threesObject = diceArray.filter(dice => dice.number === 3);
-    const foursObject = diceArray.filter(dice => dice.number === 4);
-    const fivesObject = diceArray.filter(dice => dice.number === 5);
-    const sixesObject = diceArray.filter(dice => dice.number === 6);
+    const notHeldArray = diceArray.filter(dice => !dice.isHeld);
+    const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false);
+    const twosObject = diceArray.filter(dice => dice.number === 2 && dice.isHeld === false);
+    const threesObject = diceArray.filter(dice => dice.number === 3 && dice.isHeld === false);
+    const foursObject = diceArray.filter(dice => dice.number === 4 && dice.isHeld === false);
+    const fivesObject = diceArray.filter(dice => dice.number === 5 && dice.isHeld === false);
+    const sixesObject = diceArray.filter(dice => dice.number === 6 && dice.isHeld === false);
 
     let ones = onesObject.length;
     let twos = twosObject.length;
@@ -22,6 +30,10 @@ export function displayScoringOptions() {
     let sixes = sixesObject.length;
 
     let possibleScoringDice = 0;
+
+    let playerOneDiceRoll = getPlayers()[0].diceroll;
+    let playerTwoDiceRoll = getPlayers()[1].diceroll;
+
 
     if (ones >= 3) {
         if (ones === 3) {
@@ -139,7 +151,7 @@ export function displayScoringOptions() {
         }
     }
     if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) {
-        const choice = `Flush: 1500 pts`;
+        const choice = `Straight: 1500 pts`;
         renderPlayerChoice(choice, diceArray, 1500);
         possibleScoringDice++;
     }
@@ -163,10 +175,20 @@ export function displayScoringOptions() {
         renderPlayerChoice(choice, onesObject, 100);
         possibleScoringDice++;
     } else if (possibleScoringDice === 0) {
-        const choice = `No scoring dice: 500 pts`;
-        renderPlayerChoice(choice, diceArray, 500);
+        if (notHeldArray.length === 6) {
+            const choice = `No scoring dice: 500 pts`;
+            renderPlayerChoice(choice, diceArray, 500);
+        }
+    }
+    else {
+        console.log('zilch');
+        const choice = `Zilch`;
+        renderPlayerChoice(choice, diceArray, 0);
+        //end turn somehow some way.  impossible
     }
 }
+
+// (notHeldArray.length < 6) 
 
 let bankValue = 0;
 
@@ -181,14 +203,15 @@ export function bankZero() {
     return bankValue;
 }
 
-
-bankButton.disabled = true;
+bankZero();
 
 function renderPlayerChoice(choice, scoringDice, score) {
     const choiceDiv = document.createElement('div');
     choiceDiv.textContent = choice;
-    playerChoiceDiv.append(choiceDiv);
-    choiceDiv.setAttribute('id', scoringDice[0].id);
+
+    if (!(scoringDice[0].isHeld)) {
+        playerChoiceDiv.append(choiceDiv);
+    }
 
     choiceDiv.addEventListener('click', () => {
 
@@ -199,13 +222,15 @@ function renderPlayerChoice(choice, scoringDice, score) {
         });
 
         bankValue += score;
+        disableRoll(true);
         bankButton.textContent = `Bank ${bankValue}`;
-
-
 
         if (bankValue > 299) {
             bankButton.disabled = false;
         }
+
+        choiceDiv.textContent = '';
+        rollButton.disabled = false;
+
     });
 }
-
