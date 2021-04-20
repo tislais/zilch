@@ -11,16 +11,18 @@ h2 {
     margin-top: 40px;
 }
 
-ul {
+#dice-list {
     display: flex;
     list-style-type: none;
     font-size: 1.6rem;
 }
 
-li {
+#dice-list i {
     margin: 10px;
+    font-size: 3.5rem;
+    color: #333;
 }
 
-.held {
-    color: red;
+#dice-list i.held {
+    color: #c00;
 }
