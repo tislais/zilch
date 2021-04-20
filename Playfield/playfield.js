@@ -18,25 +18,42 @@ const playerChoiceDiv = document.getElementById('player-choice');
 
 let dice = diceJS;
 
-const generateRandomNumber = function () {
+const generateRandomNumber = function() {
     return Math.floor((Math.random() * 6) + 1);
 };
 
+//fas fa-dice-one
+ 
 function renderDiceValue(array) {
     diceList.innerHTML = '';
     const currentRoll = [];
     for (let arrayitem of array) {
-        const die = document.createElement('div');
+        const die = document.createElement('i');
+        die.classList.add('fas');
+
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
             arrayitem.number = generateRandomNumber();
-            die.textContent = arrayitem.number;
+            //die.textContent = arrayitem.number;
         } else if (arrayitem.isHeld) {
-            die.textContent = arrayitem.number;
+            //die.textContent = arrayitem.number;
             die.classList.add('held');
         }
 
         currentRoll.push(arrayitem.number);
+        if (arrayitem.number === 1){
+            die.classList.add('fa-dice-one');
+        } else if (arrayitem.number === 2) {
+            die.classList.add('fa-dice-two');
+        } else if (arrayitem.number === 3) {
+            die.classList.add('fa-dice-three');
+        } else if (arrayitem.number === 4) {
+            die.classList.add('fa-dice-four');
+        } else if (arrayitem.number === 5) {
+            die.classList.add('fa-dice-five');
+        } else if (arrayitem.number === 6) {
+            die.classList.add('fa-dice-six');
+        }
         diceList.append(die);
     }
 }
