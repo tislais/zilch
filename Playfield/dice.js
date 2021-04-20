@@ -6,27 +6,27 @@ export default [
     },
     {
         id: 'die2',
-        number: 2,
+        number: 1,
         isHeld: false,
     },
     {
         id: 'die3',
-        number: 3,
+        number: 1,
         isHeld: false,
     },
     {
         id: 'die4',
-        number: 4,
+        number: 1,
         isHeld: false,
     },
     {
         id: 'die5',
-        number: 5,
+        number: 1,
         isHeld: false,
     },
     {
         id: 'die6',
-        number: 6,
+        number: 1,
         isHeld: false,
     },
 ];
