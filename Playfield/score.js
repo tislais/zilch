@@ -2,6 +2,8 @@ import diceJS from './dice.js';
 
 const playerChoiceDiv = document.getElementById('player-choice');
 
+const bankButton = document.getElementById('bank-button');
+
 export function displayScoringOptions() {
     const diceArray = diceJS;
 
@@ -23,24 +25,24 @@ export function displayScoringOptions() {
 
     if (ones >= 3) {
         if (ones === 3) {
-            
+
             const choice = `3 ones: 1000 pts`;
             renderPlayerChoice(choice, onesObject, 1000);
             possibleScoringDice++;
-        } else if (ones === 4) { 
+        } else if (ones === 4) {
             const choice = `4 ones: 2000 pts`;
             renderPlayerChoice(choice, onesObject, 2000);
             possibleScoringDice++;
-        } else if (ones === 5) { 
+        } else if (ones === 5) {
             const choice = `5 ones: 4000 pts`;
             renderPlayerChoice(choice, onesObject, 4000);
             possibleScoringDice++;
-        } else if (ones === 6) { 
+        } else if (ones === 6) {
             const choice = `6 ones: 8000 pts`;
             renderPlayerChoice(choice, onesObject, 8000);
             possibleScoringDice++;
         }
-    } 
+    }
     if (twos >= 3) {
         if (twos === 3) {
             const choice = `3 twos: 200 pts`;
@@ -59,7 +61,7 @@ export function displayScoringOptions() {
             renderPlayerChoice(choice, twosObject, 1600);
             possibleScoringDice++;
         }
-    } 
+    }
     if (threes >= 3) {
         if (threes === 3) {
             const choice = `3 threes: 300 pts`;
@@ -78,7 +80,7 @@ export function displayScoringOptions() {
             renderPlayerChoice(choice, threesObject, 2400);
             possibleScoringDice++;
         }
-    } 
+    }
     if (fours >= 3) {
         if (fours === 3) {
             const choice = `3 fours: 400 pts`;
@@ -97,7 +99,7 @@ export function displayScoringOptions() {
             renderPlayerChoice(choice, foursObject, 3200);
             possibleScoringDice++;
         }
-    } 
+    }
     if (fives >= 3) {
         if (fives === 3) {
             const choice = `3 fives: 500 pts`;
@@ -116,7 +118,7 @@ export function displayScoringOptions() {
             renderPlayerChoice(choice, fivesObject, 4000);
             possibleScoringDice++;
         }
-    } 
+    }
     if (sixes >= 3) {
         if (sixes === 3) {
             const choice = `3 sixes: 600 pts`;
@@ -135,27 +137,27 @@ export function displayScoringOptions() {
             renderPlayerChoice(choice, sixesObject, 4800);
             possibleScoringDice++;
         }
-    } 
+    }
     if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) {
         const choice = `Flush: 1500 pts`;
         renderPlayerChoice(choice, diceArray, 1500);
         possibleScoringDice++;
-    } 
+    }
     if (fives === 2) {
         const choice = `2 fives: 100 pts`;
         renderPlayerChoice(choice, fivesObject, 100);
         possibleScoringDice++;
-    } 
+    }
     if (fives === 1) {
         const choice = `Single five: 50 pts`;
         renderPlayerChoice(choice, fivesObject, 50);
         possibleScoringDice++;
-    } 
+    }
     if (ones === 2) {
         const choice = `2 ones: 200 pts`;
         renderPlayerChoice(choice, onesObject, 200);
         possibleScoringDice++;
-    } 
+    }
     if (ones === 1) {
         const choice = `Single one: 100 pts`;
         renderPlayerChoice(choice, onesObject, 100);
@@ -168,26 +170,42 @@ export function displayScoringOptions() {
 
 let bankValue = 0;
 
+export function bankZero() {
+
+    bankValue = 0;
+
+    bankButton.textContent = `Bank: ${bankValue}`;
+
+    bankButton.disabled = true;
+
+    return bankValue;
+}
+
+
+bankButton.disabled = true;
+
 function renderPlayerChoice(choice, scoringDice, score) {
     const choiceDiv = document.createElement('div');
     choiceDiv.textContent = choice;
     playerChoiceDiv.append(choiceDiv);
-
-    
+    choiceDiv.setAttribute('id', scoringDice[0].id);
 
     choiceDiv.addEventListener('click', () => {
-        console.log(choice);
-        //find out which dice have scored and change isHeld to true
-        if (scoringDice) {
-            scoringDice.forEach(die => {
-                die.isHeld = true;
-                console.log(die);
-                const held = document.getElementById(die.id);
-                held.classList.add('held');
-                bankValue += score;
-            });}
-        
 
+        scoringDice.forEach(die => {
+            die.isHeld = true;
+            const held = document.getElementById(die.id);
+            held.classList.add('held');
+        });
+
+        bankValue += score;
+        bankButton.textContent = `Bank ${bankValue}`;
+
+
+
+        if (bankValue > 299) {
+            bankButton.disabled = false;
+        }
     });
 }
 
