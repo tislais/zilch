@@ -77,6 +77,9 @@ const generateRandomNumber = function(){
 };
 
 
+
+
+
 function renderDiceValue(array) {
     const currentRoll = [];
     for (let arrayitem of array) {
@@ -93,10 +96,22 @@ function renderDiceValue(array) {
     die5.textContent = currentRoll[4];
     die6.textContent = currentRoll[5];
 
-    
+    const ones = getOccurrence(currentRoll, 1);
+    const twos = getOccurrence(currentRoll, 2);
+    const threes = getOccurrence(currentRoll, 3);
+    const fours = getOccurrence(currentRoll, 4);
+    const fives = getOccurrence(currentRoll, 5);
+    const sixes = getOccurrence(currentRoll, 6);
+    console.log(ones, twos, threes, fours, fives, sixes);
+}
+
+function getOccurrence(array, value) {
+    return array.filter((v) => (v === value)).length;
 }
 
 rollButton.addEventListener('click', () => {
     renderDiceValue(dice);
+
+    
     
 });
