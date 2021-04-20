@@ -6,11 +6,11 @@
 
 import { createPlayers } from './local-storage-utils.js';
 
-const button = document.querySelector('button');
+const form = document.getElementById('form');
 const inputOne = document.getElementById('player-one-name');
 const inputTwo = document.getElementById('player-two-name');
 
-button.addEventListener('submit', (e) => {
+form.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
