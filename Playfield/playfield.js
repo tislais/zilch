@@ -36,59 +36,26 @@ const die3 = document.getElementById('die3');
 const die4 = document.getElementById('die4');
 const die5 = document.getElementById('die5');
 const die6 = document.getElementById('die6');
+
 const rollButton = document.getElementById('roll-button');
-const bankButton = document.getElementById('bank-button');
 
-const dice = [
-    {
-        id: 'die1',
-        number: 1,
-        isHeld: false,
-    },
-    {
-        id: 'die2',
-        number: 2,
-        isHeld: false,
-    },
-    {
-        id: 'die3',
-        number: 3,
-        isHeld: false,
-    },
-    {
-        id: 'die4',
-        number: 4,
-        isHeld: false,
-    },
-    {
-        id: 'die5',
-        number: 5,
-        isHeld: false,
-    },
-    {
-        id: 'die6',
-        number: 6,
-        isHeld: false,
-    },
-];
+import diceJS from './dice.js';
 
-const generateRandomNumber = function(){
-     	return Math.floor((Math.random() * 6) + 1);
+let dice = diceJS;
+
+const generateRandomNumber = function () {
+    return Math.floor((Math.random() * 6) + 1);
 };
-
-
-
-
 
 function renderDiceValue(array) {
     const currentRoll = [];
     for (let arrayitem of array) {
-        
+
         arrayitem.number = generateRandomNumber();
-        
+
         currentRoll.push(arrayitem.number);
     }
-    
+
     die1.textContent = currentRoll[0];
     die2.textContent = currentRoll[1];
     die3.textContent = currentRoll[2];
@@ -102,7 +69,6 @@ function renderDiceValue(array) {
     const fours = getOccurrence(currentRoll, 4);
     const fives = getOccurrence(currentRoll, 5);
     const sixes = getOccurrence(currentRoll, 6);
-    console.log(ones, twos, threes, fours, fives, sixes);
 }
 
 function getOccurrence(array, value) {
@@ -111,7 +77,4 @@ function getOccurrence(array, value) {
 
 rollButton.addEventListener('click', () => {
     renderDiceValue(dice);
-
-    
-    
 });
