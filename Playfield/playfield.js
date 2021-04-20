@@ -1,5 +1,4 @@
 import { displayScoringOptions } from './score.js';
-import { getPlayers } from '../local-storage-utils.js';
 import diceJS from './dice.js';
 import { bankZero } from './score.js';
 
@@ -19,9 +18,6 @@ const playerChoiceDiv = document.getElementById('player-choice');
 
 let dice = diceJS;
 
-player1Name.textContent = getPlayers()[0].name;
-player2Name.textContent = getPlayers()[1].name;
-
 const generateRandomNumber = function () {
     return Math.floor((Math.random() * 6) + 1);
 };
@@ -31,41 +27,35 @@ function renderDiceValue(array) {
     const currentRoll = [];
     for (let arrayitem of array) {
         const die = document.createElement('div');
-        //die.classList.add(arrayitem.id);
         die.setAttribute('id', arrayitem.id);
-        arrayitem.number = generateRandomNumber();
-        die.textContent = arrayitem.number;
+        if (!arrayitem.isHeld) {
+            arrayitem.number = generateRandomNumber();
+            die.textContent = arrayitem.number;
+        } else if (arrayitem.isHeld) {
+            die.textContent = arrayitem.number;
+            die.classList.add('held');
+        }
 
         currentRoll.push(arrayitem.number);
         diceList.append(die);
     }
-
-    // die1.textContent = currentRoll[0];
-    // die2.textContent = currentRoll[1];
-    // die3.textContent = currentRoll[2];
-    // die4.textContent = currentRoll[3];
-    // die5.textContent = currentRoll[4];
-    // die6.textContent = currentRoll[5];
-
-    // const ones = getOccurrence(currentRoll, 1);
-    // const twos = getOccurrence(currentRoll, 2);
-    // const threes = getOccurrence(currentRoll, 3);
-    // const fours = getOccurrence(currentRoll, 4);
-    // const fives = getOccurrence(currentRoll, 5);
-    // const sixes = getOccurrence(currentRoll, 6);
 }
 
-//function getOccurrence(array, value) {
-//     return array.filter((v) => (v === value)).length;
-// }
-
 rollButton.addEventListener('click', () => {
+    rollButton.disabled = true;
     playerChoiceDiv.innerHTML = '';
     renderDiceValue(dice);
     displayScoringOptions();
+
 });
 
 bankButton.addEventListener('click', () => {
     bankZero();
     playerChoiceDiv.innerHTML = '';
+
+    //end turn after banking somehow some way. impossible
 });
+
+export function disableRoll(bankValue, boolean) {
+    rollButton.disabled = boolean;
+}
