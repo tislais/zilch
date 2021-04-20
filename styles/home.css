@@ -20,3 +20,7 @@ ul {
 li {
     margin: 10px;
 }
+
+.held {
+    color: red;
+}
