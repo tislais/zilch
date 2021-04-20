@@ -2,8 +2,6 @@ import diceJS from './dice.js';
 
 import { disableRoll } from './playfield.js';
 
-import { getPlayers } from '../local-storage-utils.js';
-
 const playerChoiceDiv = document.getElementById('player-choice');
 
 const bankButton = document.getElementById('bank-button');
@@ -13,6 +11,8 @@ const rollButton = document.getElementById('roll-button');
 export function displayScoringOptions() {
 
     const diceArray = diceJS;
+
+    let possibleScoringDice = 0;
 
     const notHeldArray = diceArray.filter(dice => !dice.isHeld);
     const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false);
@@ -29,15 +29,8 @@ export function displayScoringOptions() {
     let fives = fivesObject.length;
     let sixes = sixesObject.length;
 
-    let possibleScoringDice = 0;
-
-    let playerOneDiceRoll = getPlayers()[0].diceroll;
-    let playerTwoDiceRoll = getPlayers()[1].diceroll;
-
-
     if (ones >= 3) {
         if (ones === 3) {
-
             const choice = `3 ones: 1000 pts`;
             renderPlayerChoice(choice, onesObject, 1000);
             possibleScoringDice++;
@@ -55,6 +48,7 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (twos >= 3) {
         if (twos === 3) {
             const choice = `3 twos: 200 pts`;
@@ -74,6 +68,7 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (threes >= 3) {
         if (threes === 3) {
             const choice = `3 threes: 300 pts`;
@@ -93,6 +88,7 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (fours >= 3) {
         if (fours === 3) {
             const choice = `3 fours: 400 pts`;
@@ -112,6 +108,7 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (fives >= 3) {
         if (fives === 3) {
             const choice = `3 fives: 500 pts`;
@@ -131,6 +128,7 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (sixes >= 3) {
         if (sixes === 3) {
             const choice = `3 sixes: 600 pts`;
@@ -150,45 +148,50 @@ export function displayScoringOptions() {
             possibleScoringDice++;
         }
     }
+
     if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) {
         const choice = `Straight: 1500 pts`;
         renderPlayerChoice(choice, diceArray, 1500);
         possibleScoringDice++;
     }
+
     if (fives === 2) {
         const choice = `2 fives: 100 pts`;
         renderPlayerChoice(choice, fivesObject, 100);
         possibleScoringDice++;
     }
+
     if (fives === 1) {
         const choice = `Single five: 50 pts`;
         renderPlayerChoice(choice, fivesObject, 50);
         possibleScoringDice++;
     }
+
     if (ones === 2) {
         const choice = `2 ones: 200 pts`;
         renderPlayerChoice(choice, onesObject, 200);
         possibleScoringDice++;
     }
+
     if (ones === 1) {
         const choice = `Single one: 100 pts`;
         renderPlayerChoice(choice, onesObject, 100);
         possibleScoringDice++;
-    } else if (possibleScoringDice === 0) {
+
+    }
+    if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
+            console.log('free score');
             const choice = `No scoring dice: 500 pts`;
-            renderPlayerChoice(choice, diceArray, 500);
+            renderPlayerChoice(choice, notHeldArray, 500);
+        } else {
+            console.log('zilch');
+            const choice = 'Zilch';
+            renderPlayerChoice(choice, notHeldArray, 0);
+            //end turn somehow some way.  impossible
         }
     }
-    else {
-        console.log('zilch');
-        const choice = `Zilch`;
-        renderPlayerChoice(choice, diceArray, 0);
-        //end turn somehow some way.  impossible
-    }
 }
-
-// (notHeldArray.length < 6) 
 
 let bankValue = 0;
 
