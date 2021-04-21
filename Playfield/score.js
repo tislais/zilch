@@ -3,7 +3,7 @@ import diceJS from './dice.js';
 import { renderPlayerScores, renderTitle } from './render.js';
 
 import { disableRoll } from './playfield.js';
-import dice from './dice.js';
+
 
 const playerChoiceDiv = document.getElementById('player-choice');
 
@@ -187,7 +187,7 @@ function renderPlayerZilch() {
     updateZilch();
     changeCurrrentPlayer();
     renderTitle();
-    updateScore();
+    updateScore(0);
     resetDice(1);
     bankButton.textContent = 'Bank';
 }
