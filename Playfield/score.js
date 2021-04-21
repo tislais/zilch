@@ -1,5 +1,6 @@
 import { changeCurrrentPlayer, updateScore } from '../local-storage-utils.js';
 import diceJS from './dice.js';
+import { renderPlayerScores, renderTitle } from './render.js';
 
 import { disableRoll } from './playfield.js';
 
@@ -8,6 +9,8 @@ const playerChoiceDiv = document.getElementById('player-choice');
 const bankButton = document.getElementById('bank-button');
 
 const rollButton = document.getElementById('roll-button');
+
+renderTitle();
 
 export function displayScoringOptions() {
 
@@ -188,6 +191,8 @@ export function displayScoringOptions() {
             const choice = 'Zilch';
             renderPlayerChoice(choice, notHeldArray, 0);
             changeCurrrentPlayer();
+            renderTitle();
+            updateScore();
         }
     }
 }
@@ -207,7 +212,7 @@ export function bankZero() {
 
 bankZero();
 
-function renderPlayerChoice(choice, scoringDice, score,) {
+function renderPlayerChoice(choice, scoringDice, score) {
 
     const choiceDiv = document.createElement('div');
     choiceDiv.textContent = choice;
@@ -236,8 +241,12 @@ function renderPlayerChoice(choice, scoringDice, score,) {
         rollButton.disabled = false;
 
     });
+
 }
 
 bankButton.addEventListener('click', () => {
-    updateScore(score);
+    updateScore(bankValue);
+    renderPlayerScores();
+    changeCurrrentPlayer();
+    renderTitle();
 });

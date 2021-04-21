@@ -1,7 +1,7 @@
 import { displayScoringOptions } from './score.js';
 import diceJS from './dice.js';
 import { bankZero } from './score.js';
-import { changeCurrrentPlayer, getPlayers } from '../local-storage-utils.js';
+import { getPlayers } from '../local-storage-utils.js';
 
 const diceList = document.getElementById('dice-list');
 const rollButton = document.getElementById('roll-button');
@@ -69,9 +69,7 @@ bankButton.addEventListener('click', () => {
     bankZero();
     playerChoiceDiv.innerHTML = '';
 
-    changeCurrrentPlayer();
-
-    //end turn after banking somehow some way. impossible
+    dice.forEach(die => { die.isHeld = false; });
 });
 
 export function disableRoll(bankValue, boolean) {

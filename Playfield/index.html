@@ -14,29 +14,20 @@
 </head>
 
 <body>
-
+    <h1>Current Player: <span>test</span></h1>
     <div id="dice-list">
-        <!--<li id="die1">1</li>
-        <li id="die2">2</li>
-        <li id="die3">3</li>
-        <li id="die4">4</li>
-        <li id="die5">5</li>
-        <li id="die6">6</li>-->
-        <!-- Space to add lis dynamically -->
     </div>
 
     <h2 id="player-1-name"></h2>
     <table>
         <thead>
             <tr>
-                <td>Round</td>
-                <td>Total</td>
+                <th>Round</th>
+                <th>Total</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <!---          <td></td> space to add tds dynamically -->
-            </tr>
+        <tbody id="player-one-table">
+
         </tbody>
     </table>
 
@@ -44,14 +35,12 @@
     <table>
         <thead>
             <tr>
-                <td>Round</td>
-                <td>Total</td>
+                <th>Round</th>
+                <th>Total</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <!---          <td></td> space to add tds dynamically -->
-            </tr>
+        <tbody id="player-two-table">
+
         </tbody>
     </table>
 
@@ -62,7 +51,7 @@
     <!--Space to dynamically render player score choices-->
     <script type="module" src="./playfield.js"></script>
     <script type="module" src="./score.js"></script>
-
+    <script type="module" src="./render.js"></script>
 </body>
 
 </html>
