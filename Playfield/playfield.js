@@ -21,7 +21,7 @@ const generateRandomNumber = function () {
     return Math.floor((Math.random() * 6) + 1);
 };
 
-//fas fa-dice-one
+
 
 function renderDiceValue(array) {
     diceList.innerHTML = '';
@@ -35,9 +35,9 @@ function renderDiceValue(array) {
             setTimeout(function () { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
-            //die.textContent = arrayitem.number;
+
         } else if (arrayitem.isHeld) {
-            //die.textContent = arrayitem.number;
+
             die.classList.add('held');
         }
 
