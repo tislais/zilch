@@ -1,4 +1,4 @@
-import { changeCurrrentPlayer, updateScore, updateZilch } from '../local-storage-utils.js';
+import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch } from '../local-storage-utils.js';
 import diceJS from './dice.js';
 import { renderPlayerScores, renderTitle } from './render.js';
 
@@ -185,6 +185,9 @@ function renderPlayerZilch() {
     bankValue = 0;
     rollButton.disabled = false;
     updateZilch();
+    if (getCurrentPlayer().zilchRun === 3) {
+        updateScore(-500);
+    }
     changeCurrrentPlayer();
     renderTitle();
     updateScore(0);
@@ -242,7 +245,9 @@ function renderPlayerChoice(choice, scoringDice, score) {
 bankButton.addEventListener('click', () => {
     updateScore(bankValue);
     renderPlayerScores();
+    clearZilchRun();
     changeCurrrentPlayer();
     renderTitle();
+
 });
 

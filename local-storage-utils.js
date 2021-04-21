@@ -26,7 +26,8 @@ export function createPlayers(nameOne, nameTwo) {
         zilches: 0,
         isTurn: true,
         diceroll: 0,
-        turn: true
+        turn: true,
+        zilchRun: 0
     };
 
     const playerTwo = {
@@ -36,7 +37,8 @@ export function createPlayers(nameOne, nameTwo) {
         zilches: 0,
         isTurn: false,
         diceroll: 0,
-        turn: false
+        turn: false,
+        zilchRun: 0
     };
 
     const players = [playerOne, playerTwo];
@@ -63,6 +65,23 @@ export function updateScore(playerScore) {
 
     setPlayers(players);
 }
+export function clearZilchRun() {
+    let players = getPlayers();
+
+    const playerName = getCurrentPlayer().name;
+
+    if (players[0].name === playerName) {
+        players[0].zilchRun = 0;
+
+    }
+    if (players[1].name === playerName) {
+        players[1].zilchRun = 0;
+
+    }
+
+    setPlayers(players);
+
+}
 
 export function updateZilch() {
 
@@ -72,9 +91,11 @@ export function updateZilch() {
 
     if (players[0].name === playerName) {
         players[0].zilches = players[0].zilches + 1;
+        players[0].zilchRun = players[0].zilchRun + 1;
     }
     if (players[1].name === playerName) {
         players[1].zilches = players[1].zilches + 1;
+        players[1].zilchRun = players[1].zilchRun + 1;
     }
 
     setPlayers(players);

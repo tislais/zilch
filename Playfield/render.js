@@ -19,18 +19,33 @@ export function renderPlayerScores() {
     const newTr = document.createElement('tr');
     const playerRoundScore = document.createElement('td');
     const playerTotalScore = document.createElement('td');
+    const zilchScore = document.createElement('td');
+
 
     playerRoundScore.textContent = roundScore;
     playerTotalScore.textContent = totalScore;
+    zilchScore.textContent = 'ZILCH!';
 
     if (playerOne.turn === true) {
-        newTr.append(playerRoundScore, playerTotalScore);
-        playerOneTable.append(newTr);
+        if (playerOne.zilchRun > 0) {
+            newTr.append(zilchScore, playerTotalScore);
+            playerOneTable.append(newTr);
+        } else {
+
+            newTr.append(playerRoundScore, playerTotalScore);
+            playerOneTable.append(newTr); 
+        }
     }
 
     if (playerTwo.turn === true) {
-        newTr.append(playerRoundScore, playerTotalScore);
-        playerTwoTable.append(newTr);
+        if (playerTwo.zilchRun > 0) {
+            newTr.append(zilchScore, playerTotalScore);
+            playerTwoTable.append(newTr);
+        } else {
+
+            newTr.append(playerRoundScore, playerTotalScore);
+            playerTwoTable.append(newTr); 
+        }
     }
 
 }
