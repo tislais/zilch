@@ -10,22 +10,25 @@ const bankButton = document.getElementById('bank-button');
 
 const rollButton = document.getElementById('roll-button');
 
+const diceArray = diceJS;
+let notHeldArray = diceArray.filter(dice => !dice.isHeld);
+
 renderTitle();
 
 export function displayScoringOptions() {
 
-    const diceArray = diceJS;
+    
 
     let possibleScoringDice = 0;
 
-    const notHeldArray = diceArray.filter(dice => !dice.isHeld);
+    notHeldArray = diceArray.filter(dice => !dice.isHeld);
     const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false);
     const twosObject = diceArray.filter(dice => dice.number === 2 && dice.isHeld === false);
     const threesObject = diceArray.filter(dice => dice.number === 3 && dice.isHeld === false);
     const foursObject = diceArray.filter(dice => dice.number === 4 && dice.isHeld === false);
     const fivesObject = diceArray.filter(dice => dice.number === 5 && dice.isHeld === false);
     const sixesObject = diceArray.filter(dice => dice.number === 6 && dice.isHeld === false);
-
+    
     let ones = onesObject.length;
     let twos = twosObject.length;
     let threes = threesObject.length;
@@ -33,39 +36,39 @@ export function displayScoringOptions() {
     let fives = fivesObject.length;
     let sixes = sixesObject.length;
 
-    // if (ones >= 3) {
-    //     if (ones === 3) {
-    //         const choice = `3 ones: 1000 pts`;
-    //         renderPlayerChoice(choice, onesObject, 1000,);
-    //         possibleScoringDice++;
-    //     } else if (ones === 4) {
-    //         const choice = `4 ones: 2000 pts`;
-    //         renderPlayerChoice(choice, onesObject, 2000);
-    //         possibleScoringDice++;
-    //     } else if (ones === 5) {
-    //         const choice = `5 ones: 4000 pts`;
-    //         renderPlayerChoice(choice, onesObject, 4000);
-    //         possibleScoringDice++;
-    //     } else if (ones === 6) {
-    //         const choice = `6 ones: 8000 pts`;
-    //         renderPlayerChoice(choice, onesObject, 8000);
-    //         possibleScoringDice++;
-    //     }
-    // }
-
-    if (ones >= 3) { // for every increase over three of array length double result 
-        let threeScore = 500;
-        let i = 3;
-
-        while (i <= ones) {
-            threeScore = threeScore * 2;
-            i++;
+    if (ones >= 3) {
+        if (ones === 3) {
+            const choice = `3 ones: 1000 pts`;
+            renderPlayerChoice(choice, onesObject, 1000,);
+            possibleScoringDice++;
+        } else if (ones === 4) {
+            const choice = `4 ones: 2000 pts`;
+            renderPlayerChoice(choice, onesObject, 2000);
+            possibleScoringDice++;
+        } else if (ones === 5) {
+            const choice = `5 ones: 4000 pts`;
+            renderPlayerChoice(choice, onesObject, 4000);
+            possibleScoringDice++;
+        } else if (ones === 6) {
+            const choice = `6 ones: 8000 pts`;
+            renderPlayerChoice(choice, onesObject, 8000);
+            possibleScoringDice++;
         }
-
-        const choice = `${ones} ones: ${threeScore} pts`;
-
-        renderPlayerChoice(choice, onesObject, threeScore);
     }
+
+    //if (ones >= 3) { // for every increase over three of array length double result 
+       // let threeScore = 500;
+        //let i = 3;
+
+        //while (i <= ones) {
+    //         threeScore = threeScore * 2;
+    //         i++;
+    //     }
+
+    //     const choice = `${ones} ones: ${threeScore} pts`;
+
+    //     renderPlayerChoice(choice, onesObject, threeScore);
+    // }
 
     if (twos >= 3) {
         if (twos === 3) {
@@ -201,13 +204,19 @@ export function displayScoringOptions() {
         if (notHeldArray.length === 6) {
             const choice = `No scoring dice: 500 pts`;
             renderPlayerChoice(choice, notHeldArray, 500);
-        } else {
-            const choice = 'Zilch';
-            renderPlayerChoice(choice, notHeldArray, 0);
+        } 
+        
+        else {
+            renderPlayerZilch();
+            //const choice = 'Zilch';
+            //renderPlayerChoice(choice, notHeldArray, 0);
             changeCurrrentPlayer();
             renderTitle();
             updateScore();
         }
+    }
+    if (notHeldArray.length === 0) {
+        console.log('notHeldArray.length === 0');
     }
 }
 
@@ -226,6 +235,16 @@ export function bankZero() {
 
 bankZero();
 
+function renderPlayerZilch(){
+    
+    console.log('ZILCH');
+
+}
+
+function renderPlayerReroll() {
+    console.log('REROLL TIME');
+}
+
 function renderPlayerChoice(choice, scoringDice, score) {
 
     const choiceDiv = document.createElement('div');
@@ -236,12 +255,19 @@ function renderPlayerChoice(choice, scoringDice, score) {
     }
 
     choiceDiv.addEventListener('click', () => {
-
+        
         scoringDice.forEach(die => {
             die.isHeld = true;
+            
             const held = document.getElementById(die.id);
             held.classList.add('held');
         });
+        const isHeldArray = diceArray.filter(die => die.isHeld);
+
+        if (isHeldArray.length === 6) {
+            renderPlayerReroll();
+            rollButton.textContent = 'Free Roll!';
+        }
 
         bankValue += score;
         disableRoll(true);
