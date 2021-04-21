@@ -58,6 +58,23 @@ export function updateScore(playerScore) {
     if (players[1].name === playerName) {
         players[1].score += playerScore;
         players[1].roundScore = playerScore;
+
+    }
+
+    setPlayers(players);
+}
+
+export function updateZilch() {
+
+    let players = getPlayers();
+
+    const playerName = getCurrentPlayer().name;
+
+    if (players[0].name === playerName) {
+        players[0].zilches = players[0].zilches + 1;
+    }
+    if (players[1].name === playerName) {
+        players[1].zilches = players[1].zilches + 1;
     }
 
     setPlayers(players);

@@ -1,10 +1,13 @@
-import { changeCurrrentPlayer, updateScore } from '../local-storage-utils.js';
+import { changeCurrrentPlayer, updateScore, updateZilch } from '../local-storage-utils.js';
 import diceJS from './dice.js';
 import { renderPlayerScores, renderTitle } from './render.js';
 
 import { disableRoll } from './playfield.js';
+import dice from './dice.js';
 
 const playerChoiceDiv = document.getElementById('player-choice');
+
+const diceList = document.getElementById('dice-list');
 
 const bankButton = document.getElementById('bank-button');
 
@@ -121,19 +124,13 @@ export function displayScoringOptions() {
         }
 
     }
+
     if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
             const choice = `No scoring dice: 500 pts`;
             renderPlayerChoice(choice, notHeldArray, 500);
-        }
-
-        else {
+        } else {
             renderPlayerZilch();
-            //const choice = 'Zilch';
-            //renderPlayerChoice(choice, notHeldArray, 0);
-            changeCurrrentPlayer();
-            renderTitle();
-            updateScore();
         }
     }
     if (notHeldArray.length === 0) {
@@ -156,14 +153,51 @@ export function bankZero() {
 
 bankZero();
 
+export function resetDice(one) {
+    for (let die of diceArray) {
+        die.isHeld = false;
+        die.number = one;
+        one++;
+    }
+    diceList.innerHTML = '';
+    for (let arrayitem of diceArray) {
+        const die = document.createElement('i');
+        die.classList.add('fas');
+        if (arrayitem.number === 1) {
+            die.classList.add('fa-dice-one');
+        } else if (arrayitem.number === 2) {
+            die.classList.add('fa-dice-two');
+        } else if (arrayitem.number === 3) {
+            die.classList.add('fa-dice-three');
+        } else if (arrayitem.number === 4) {
+            die.classList.add('fa-dice-four');
+        } else if (arrayitem.number === 5) {
+            die.classList.add('fa-dice-five');
+        } else if (arrayitem.number === 6) {
+            die.classList.add('fa-dice-six');
+        }
+        diceList.append(die);
+    }
+}
+
 function renderPlayerZilch() {
+    bankButton.disabled = true;
+    bankValue = 0;
+    rollButton.disabled = false;
+    updateZilch();
     changeCurrrentPlayer();
     renderTitle();
     updateScore();
+    resetDice(1);
+    bankButton.textContent = 'Bank';
 }
 
-function renderPlayerReroll() {
-    console.log('REROLL TIME');
+function renderPlayerFreeRoll() {
+    rollButton.textContent = 'Free Roll!';
+
+    for (let die of diceArray) {
+        die.isHeld = false;
+    }
 }
 
 function renderPlayerChoice(choice, scoringDice, score) {
@@ -186,7 +220,7 @@ function renderPlayerChoice(choice, scoringDice, score) {
         const isHeldArray = diceArray.filter(die => die.isHeld);
 
         if (isHeldArray.length === 6) {
-            renderPlayerReroll();
+            renderPlayerFreeRoll();
             rollButton.textContent = 'Free Roll!';
         }
 
@@ -211,3 +245,4 @@ bankButton.addEventListener('click', () => {
     changeCurrrentPlayer();
     renderTitle();
 });
+
