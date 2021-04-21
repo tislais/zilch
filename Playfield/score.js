@@ -62,6 +62,7 @@ export function displayScoringOptions() {
             i++;
         }
 
+
         const choice = `${ones} ones: ${threeScore} pts`;
 
         renderPlayerChoice(choice, onesObject, threeScore);
