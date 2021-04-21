@@ -32,7 +32,7 @@ function renderDiceValue(array) {
 
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
-            setTimeout(function(){ die.classList.add('roll'); }, 1);
+            setTimeout(function () { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
             //die.textContent = arrayitem.number;
@@ -64,6 +64,7 @@ rollButton.addEventListener('click', () => {
     playerChoiceDiv.innerHTML = '';
     renderDiceValue(dice);
     displayScoringOptions();
+    rollButton.textContent = 'Roll';
 
 });
 
