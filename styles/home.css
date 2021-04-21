@@ -26,3 +26,12 @@ h2 {
 #dice-list i.held {
     color: #c00;
 }
+
+.roll {
+    transform: rotate(3600deg);
+    -webkit-transition: -webkit-transform 500ms ease-out;
+    -moz-transition:    -moz-transform 500ms ease-out;
+    -o-transition:      -o-transform 500ms ease-out;
+    -ms-transition:     -ms-transform 500ms ease-out;
+    transition: transform 500ms cubic-bezier(0, 0.13, 0.92, 1.03);
+}
