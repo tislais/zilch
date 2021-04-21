@@ -1,3 +1,4 @@
+import { changeCurrrentPlayer, updateScore } from '../local-storage-utils.js';
 import diceJS from './dice.js';
 
 import { disableRoll } from './playfield.js';
@@ -32,7 +33,7 @@ export function displayScoringOptions() {
     if (ones >= 3) {
         if (ones === 3) {
             const choice = `3 ones: 1000 pts`;
-            renderPlayerChoice(choice, onesObject, 1000);
+            renderPlayerChoice(choice, onesObject, 1000,);
             possibleScoringDice++;
         } else if (ones === 4) {
             const choice = `4 ones: 2000 pts`;
@@ -181,14 +182,12 @@ export function displayScoringOptions() {
     }
     if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
-            console.log('free score');
             const choice = `No scoring dice: 500 pts`;
             renderPlayerChoice(choice, notHeldArray, 500);
         } else {
-            console.log('zilch');
             const choice = 'Zilch';
             renderPlayerChoice(choice, notHeldArray, 0);
-            //end turn somehow some way.  impossible
+            changeCurrrentPlayer(); //figure this out
         }
     }
 }
@@ -208,7 +207,10 @@ export function bankZero() {
 
 bankZero();
 
-function renderPlayerChoice(choice, scoringDice, score) {
+function renderPlayerChoice(choice, scoringDice, score,) {
+
+    updateScore(score);
+
     const choiceDiv = document.createElement('div');
     choiceDiv.textContent = choice;
 

@@ -1,6 +1,7 @@
 import { displayScoringOptions } from './score.js';
 import diceJS from './dice.js';
 import { bankZero } from './score.js';
+import { changeCurrrentPlayer } from '../local-storage-utils.js';
 
 // const die1 = document.getElementById('die1');
 // const die2 = document.getElementById('die2');
@@ -18,12 +19,12 @@ const playerChoiceDiv = document.getElementById('player-choice');
 
 let dice = diceJS;
 
-const generateRandomNumber = function() {
+const generateRandomNumber = function () {
     return Math.floor((Math.random() * 6) + 1);
 };
 
 //fas fa-dice-one
- 
+
 function renderDiceValue(array) {
     diceList.innerHTML = '';
     const currentRoll = [];
@@ -41,7 +42,7 @@ function renderDiceValue(array) {
         }
 
         currentRoll.push(arrayitem.number);
-        if (arrayitem.number === 1){
+        if (arrayitem.number === 1) {
             die.classList.add('fa-dice-one');
         } else if (arrayitem.number === 2) {
             die.classList.add('fa-dice-two');
@@ -69,6 +70,8 @@ rollButton.addEventListener('click', () => {
 bankButton.addEventListener('click', () => {
     bankZero();
     playerChoiceDiv.innerHTML = '';
+
+    changeCurrrentPlayer();
 
     //end turn after banking somehow some way. impossible
 });
