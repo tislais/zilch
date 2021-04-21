@@ -29,8 +29,8 @@ export function renderPlayerScores() {
     }
 
     if (playerTwo.turn === true) {
-        playerTwoTable.append(playerRoundScore, playerTotalScore);
-        playerOneTable.append(newTr);
+        newTr.append(playerRoundScore, playerTotalScore);
+        playerTwoTable.append(newTr);
     }
 
 }

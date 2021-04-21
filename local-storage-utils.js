@@ -1,6 +1,6 @@
 const PLAYERS = 'PLAYERS';
 
-export function setPlayers(players) { // takes player object and sets them in local storage
+export function setPlayers(players) { // takes player array and sets them in local storage
 
     const stringyPlayers = JSON.stringify(players);
 
@@ -8,7 +8,7 @@ export function setPlayers(players) { // takes player object and sets them in lo
 
 }
 
-export function getPlayers() {  // gets local storage and returns object
+export function getPlayers() {  // gets local storage and returns array
 
     const stringyPlayers = localStorage.getItem(PLAYERS);
 
