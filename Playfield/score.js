@@ -187,7 +187,7 @@ export function displayScoringOptions() {
         } else {
             const choice = 'Zilch';
             renderPlayerChoice(choice, notHeldArray, 0);
-            changeCurrrentPlayer(); //figure this out
+            changeCurrrentPlayer();
         }
     }
 }
@@ -208,8 +208,6 @@ export function bankZero() {
 bankZero();
 
 function renderPlayerChoice(choice, scoringDice, score,) {
-
-    updateScore(score);
 
     const choiceDiv = document.createElement('div');
     choiceDiv.textContent = choice;
@@ -239,3 +237,7 @@ function renderPlayerChoice(choice, scoringDice, score,) {
 
     });
 }
+
+bankButton.addEventListener('click', () => {
+    updateScore(score);
+});

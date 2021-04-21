@@ -21,6 +21,7 @@ export function createPlayers(nameOne, nameTwo) {
     const playerOne = {
 
         name: nameOne,
+        roundScore: 0,
         score: 0,
         zilches: 0,
         isTurn: true,
@@ -30,6 +31,7 @@ export function createPlayers(nameOne, nameTwo) {
 
     const playerTwo = {
         name: nameTwo,
+        roundScore: 0,
         score: 0,
         zilches: 0,
         isTurn: false,
@@ -56,7 +58,6 @@ export function updateScore(playerScore) {
 
     setPlayers(players);
 }
-// update score function take in playerName and playerScore.  call on line 210 in score.js
 
 export function changeCurrrentPlayer() {
 
@@ -75,20 +76,3 @@ export function getCurrentPlayer() {
         if (player.turn) return player.name;
     }
 }
-
-
-
-// export function createPlayer(name, turn) {
-
-//     const player = {
-
-//         name: name,
-//         score: 0,
-//         zilches: 0,
-//         isTurn: true,
-//         diceroll: 0,
-//         turn: turn
-//     };
-
-//     return player;
-// }

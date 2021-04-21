@@ -1,14 +1,7 @@
 import { displayScoringOptions } from './score.js';
 import diceJS from './dice.js';
 import { bankZero } from './score.js';
-import { changeCurrrentPlayer } from '../local-storage-utils.js';
-
-// const die1 = document.getElementById('die1');
-// const die2 = document.getElementById('die2');
-// const die3 = document.getElementById('die3');
-// const die4 = document.getElementById('die4');
-// const die5 = document.getElementById('die5');
-// const die6 = document.getElementById('die6');
+import { changeCurrrentPlayer, getPlayers } from '../local-storage-utils.js';
 
 const diceList = document.getElementById('dice-list');
 const rollButton = document.getElementById('roll-button');
@@ -16,6 +9,11 @@ const player1Name = document.getElementById('player-1-name');
 const player2Name = document.getElementById('player-2-name');
 const bankButton = document.getElementById('bank-button');
 const playerChoiceDiv = document.getElementById('player-choice');
+
+const players = getPlayers();
+
+player1Name.textContent = players[0].name;
+player2Name.textContent = players[1].name;
 
 let dice = diceJS;
 
