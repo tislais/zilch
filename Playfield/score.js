@@ -33,24 +33,38 @@ export function displayScoringOptions() {
     let fives = fivesObject.length;
     let sixes = sixesObject.length;
 
-    if (ones >= 3) {
-        if (ones === 3) {
-            const choice = `3 ones: 1000 pts`;
-            renderPlayerChoice(choice, onesObject, 1000,);
-            possibleScoringDice++;
-        } else if (ones === 4) {
-            const choice = `4 ones: 2000 pts`;
-            renderPlayerChoice(choice, onesObject, 2000);
-            possibleScoringDice++;
-        } else if (ones === 5) {
-            const choice = `5 ones: 4000 pts`;
-            renderPlayerChoice(choice, onesObject, 4000);
-            possibleScoringDice++;
-        } else if (ones === 6) {
-            const choice = `6 ones: 8000 pts`;
-            renderPlayerChoice(choice, onesObject, 8000);
-            possibleScoringDice++;
+    // if (ones >= 3) {
+    //     if (ones === 3) {
+    //         const choice = `3 ones: 1000 pts`;
+    //         renderPlayerChoice(choice, onesObject, 1000,);
+    //         possibleScoringDice++;
+    //     } else if (ones === 4) {
+    //         const choice = `4 ones: 2000 pts`;
+    //         renderPlayerChoice(choice, onesObject, 2000);
+    //         possibleScoringDice++;
+    //     } else if (ones === 5) {
+    //         const choice = `5 ones: 4000 pts`;
+    //         renderPlayerChoice(choice, onesObject, 4000);
+    //         possibleScoringDice++;
+    //     } else if (ones === 6) {
+    //         const choice = `6 ones: 8000 pts`;
+    //         renderPlayerChoice(choice, onesObject, 8000);
+    //         possibleScoringDice++;
+    //     }
+    // }
+
+    if (ones >= 3) { // for every increase over three of array length double result 
+        let threeScore = 500;
+        let i = 3;
+
+        while (i <= ones) {
+            threeScore = threeScore * 2;
+            i++;
         }
+
+        const choice = `${ones} ones: ${threeScore} pts`;
+
+        renderPlayerChoice(choice, onesObject, threeScore);
     }
 
     if (twos >= 3) {
