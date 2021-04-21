@@ -46,14 +46,18 @@ export function createPlayers(nameOne, nameTwo) {
 }
 
 export function updateScore(playerScore) {
+
     let players = getPlayers();
-    const playerName = getCurrentPlayer();
+
+    const playerName = getCurrentPlayer().name; //thanks tis
 
     if (players[0].name === playerName) {
         players[0].score += playerScore;
+        players[0].roundScore = playerScore;
     }
     if (players[1].name === playerName) {
         players[1].score += playerScore;
+        players[1].roundScore = playerScore;
     }
 
     setPlayers(players);
@@ -73,6 +77,6 @@ export function getCurrentPlayer() {
     const players = getPlayers();
 
     for (let player of players) {
-        if (player.turn) return player.name;
+        if (player.turn === true) return player;
     }
 }
