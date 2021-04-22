@@ -1,8 +1,11 @@
 /* add home page styles here */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
 body {
     padding: 60px;
     background: rgb(31,27,98);
     background: linear-gradient(75deg, rgba(31,27,98,1) 0%, rgba(163,38,179,1) 33%, rgba(66,219,250,1) 100%);
+    font-family: 'Open Sans', sans-serif;
 }
 
 .wrap {
@@ -13,7 +16,7 @@ body {
 }
 
 .playfield {
-    width: 800px;
+    width: fit-content;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     border: 1px dotted #ddd;
@@ -26,11 +29,16 @@ body {
 .side {
     color: #222;
     width: 100%;
+    padding: 0 15px;
 }
 
 .side, 
 .inner-playfield {
     text-align: center;
+}
+
+.inner-playfield h1 {
+    font-size: 26px;
 }
 
 .player-1-side {
@@ -44,6 +52,14 @@ body {
 .roll-bank-buttons {
     display: flex;
     flex-direction: row;
+}
+
+.roll-bank-buttons button {    
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 1px;
+    border-radius: 4px;
 }
 
 .roll-bank-buttons button:enabled {
@@ -81,13 +97,29 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+thead tr {
+    border-bottom: 3px solid #a326b3;
+    font-weight: 700;
 }
 
 h2 {
-    font-size: 1.2rem;
+    font-size: 20px;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
+table td:first-child {
+    text-align: right;
+    border-right: 1px solid #cacaca;
+}
+
+th, td {
+    padding: 5px 10px;
+}
 
 
 #player-choice {
@@ -98,8 +130,14 @@ h2 {
 
 #player-choice div {
     padding: 20px;
-    border: 1px solid #eee;
+    border: 1px solid #a326b3;
     cursor: pointer;
+    color: #a326b3;
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
 #dice-list {
