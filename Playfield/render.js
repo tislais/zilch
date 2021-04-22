@@ -1,6 +1,5 @@
 import { getPlayers, getCurrentPlayer } from '../local-storage-utils.js';
 
-
 const playerOneTable = document.getElementById('player-one-table');
 const playerTwoTable = document.getElementById('player-two-table');
 
@@ -19,45 +18,58 @@ export function renderPlayerScores() {
     const newTr = document.createElement('tr');
     const playerRoundScore = document.createElement('td');
     const playerTotalScore = document.createElement('td');
-    const zilchScore = document.createElement('td');
-
 
     playerRoundScore.textContent = roundScore;
     playerTotalScore.textContent = totalScore;
-    
-
 
     if (playerOne.turn === true) {
-        console.log(playerOne.zilchRun);
-        if (playerOne.zilchRun > 0) {
-            zilchScore.textContent = 'ZILCH!';
-            // if (playerOne.zilchRun === 3) {
-            //     zilchScore.textContent = 'ZILCH! -500';
-            // }
-            newTr.append(zilchScore, playerTotalScore);
-            playerOneTable.append(newTr);
-        } else {
-
-            newTr.append(playerRoundScore, playerTotalScore);
-            playerOneTable.append(newTr); 
-        }
+        newTr.append(playerRoundScore, playerTotalScore);
+        playerOneTable.append(newTr);
     }
 
     if (playerTwo.turn === true) {
-        if (playerTwo.zilchRun > 0) {
-            zilchScore.textContent = 'ZILCH!';
-            if (playerTwo.zilchRun === 3) {
-                zilchScore.textContent = 'ZILCH! -500';
-            }
-            newTr.append(zilchScore, playerTotalScore);
-            playerTwoTable.append(newTr);
-        } else {
+        newTr.append(playerRoundScore, playerTotalScore);
+        playerTwoTable.append(newTr);
+    }
+}
 
-            newTr.append(playerRoundScore, playerTotalScore);
-            playerTwoTable.append(newTr); 
+export function renderZilch() {
+
+    const playerOne = getPlayers()[0];
+    const playerTwo = getPlayers()[1];
+
+    const player = getCurrentPlayer();
+
+    let totalScore = player.score;
+
+    const newTr = document.createElement('tr');
+    const zilchText = document.createElement('td');
+    const playerRoundScore = document.createElement('td');
+    const playerTotalScore = document.createElement('td');
+
+    zilchText.textContent = 'ZILCH';
+    playerRoundScore.textContent = totalScore;
+    playerTotalScore.textContent = '-500';
+
+    if (playerOne.turn === true) {
+        if (player.zilchRun === 3) {
+            newTr.append(zilchText, playerRoundScore, playerTotalScore);
+        } else {
+            newTr.append(zilchText, playerRoundScore);
         }
+        playerOneTable.append(newTr);
+
     }
 
+    if (playerTwo.turn === true) {
+        if (player.zilchRun === 3) {
+            newTr.append(zilchText, playerRoundScore, playerTotalScore);
+        } else {
+            newTr.append(zilchText, playerRoundScore);
+        }
+        playerTwoTable.append(newTr);
+
+    }
 }
 
 export function renderTitle() {
