@@ -24,10 +24,16 @@ export function renderPlayerScores() {
 
     playerRoundScore.textContent = roundScore;
     playerTotalScore.textContent = totalScore;
-    zilchScore.textContent = 'ZILCH!';
+    
+
 
     if (playerOne.turn === true) {
+        console.log(playerOne.zilchRun);
         if (playerOne.zilchRun > 0) {
+            zilchScore.textContent = 'ZILCH!';
+            // if (playerOne.zilchRun === 3) {
+            //     zilchScore.textContent = 'ZILCH! -500';
+            // }
             newTr.append(zilchScore, playerTotalScore);
             playerOneTable.append(newTr);
         } else {
@@ -39,6 +45,10 @@ export function renderPlayerScores() {
 
     if (playerTwo.turn === true) {
         if (playerTwo.zilchRun > 0) {
+            zilchScore.textContent = 'ZILCH!';
+            if (playerTwo.zilchRun === 3) {
+                zilchScore.textContent = 'ZILCH! -500';
+            }
             newTr.append(zilchScore, playerTotalScore);
             playerTwoTable.append(newTr);
         } else {

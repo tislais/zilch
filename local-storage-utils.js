@@ -65,6 +65,8 @@ export function updateScore(playerScore) {
 
     setPlayers(players);
 }
+
+
 export function clearZilchRun() {
     let players = getPlayers();
 
@@ -96,7 +98,8 @@ export function updateZilch() {
     if (players[1].name === playerName) {
         players[1].zilches = players[1].zilches + 1;
         players[1].zilchRun = players[1].zilchRun + 1;
-    }
+        
+}
 
     setPlayers(players);
 }
