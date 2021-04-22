@@ -100,7 +100,7 @@ export function displayScoringOptions() {
         }
 
         if (fives === 1) {
-            const choice = `Single five: 50 pts`;
+            const choice = `1 five: 50 pts`;
             renderPlayerChoice(choice, fivesObject, 50);
             possibleScoringDice++;
         }
@@ -112,7 +112,7 @@ export function displayScoringOptions() {
         }
 
         if (ones === 1) {
-            const choice = `Single one: 100 pts`;
+            const choice = `1 one: 100 pts`;
             renderPlayerChoice(choice, onesObject, 100);
             possibleScoringDice++;
         }
