@@ -129,9 +129,6 @@ export function displayScoringOptions() {
             renderPlayerZilch();
         }
     }
-    if (notHeldArray.length === 0) {
-        console.log('notHeldArray.length === 0');
-    }
 }
 
 export function bankZero() {
