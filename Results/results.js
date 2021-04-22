@@ -29,7 +29,7 @@ pOneZilches.textContent = playerOne.zilches;
 pOneScore.textContent = playerOne.score;
 
 pTwoName.textContent = playerTwo.name;
-pOneTurns.textContent = playerOne.turnCount;
+pTwoTurns.textContent = playerOne.turnCount;
 pTwoZilches.textContent = playerTwo.zilches;
 pTwoScore.textContent = playerTwo.score;
 
