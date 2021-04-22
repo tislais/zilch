@@ -14,43 +14,55 @@
 </head>
 
 <body>
-    <h1>Current Player: <span>test</span></h1>
-    <div id="dice-list">
+    <div class="wrap">
+        <div class="playfield">
+            <div class="player-1-side side">
+
+                <h2 id="player-1-name"></h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="player-one-table">
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="inner-playfield">
+                <h1>Your move, <span></span>.</h1>
+                <div id="dice-list">
+                </div>
+
+                <button id="roll-button">ROLL</button>
+                <button id="bank-button">BANK</button>
+
+                <div id="player-choice"></div>
+
+            </div>
+            <div class="player-2-side side">
+
+                <h2 id="player-2-name"></h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="player-two-table">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
-
-    <h2 id="player-1-name"></h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Total</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="player-one-table">
-
-        </tbody>
-    </table>
-
-    <h2 id="player-2-name"></h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Total</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="player-two-table">
-
-        </tbody>
-    </table>
-
-    <button id="roll-button">ROLL</button>
-    <button id="bank-button">BANK</button>
-
-    <div id="player-choice"></div>
-    <!--Space to dynamically render player score choices-->
     <script type="module" src="./app.js"></script>
     <script type="module" src="./render.js"></script>
 </body>

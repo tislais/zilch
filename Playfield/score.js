@@ -7,6 +7,7 @@ const diceList = document.getElementById('dice-list');
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
 
+
 const diceArray = diceJS;
 
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
