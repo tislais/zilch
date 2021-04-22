@@ -187,7 +187,9 @@ function renderPlayerZilch() {
     updateZilch();
     if (getCurrentPlayer().zilchRun === 3) {
         updateScore(-500);
+        clearZilchRun();
     }
+    renderPlayerScores();
     changeCurrrentPlayer();
     renderTitle();
     updateScore(0);
