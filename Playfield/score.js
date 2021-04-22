@@ -1,19 +1,15 @@
-import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch } from '../local-storage-utils.js';
+import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers } from '../local-storage-utils.js';
 import diceJS from './dice.js';
-import { renderPlayerScores, renderTitle } from './render.js';
-
+import { renderPlayerScores, renderTitle, renderZilch } from './render.js';
 import { disableRoll } from './playfield.js';
 
-
 const playerChoiceDiv = document.getElementById('player-choice');
-
 const diceList = document.getElementById('dice-list');
-
 const bankButton = document.getElementById('bank-button');
-
 const rollButton = document.getElementById('roll-button');
 
 const diceArray = diceJS;
+
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
 
 renderTitle();
@@ -127,8 +123,10 @@ export function displayScoringOptions() {
 
     if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
-            const choice = `No scoring dice: 500 pts`;
-            renderPlayerChoice(choice, notHeldArray, 500);
+            // const choice = `No scoring dice: 500 pts`;
+            // renderPlayerChoice(choice, notHeldArray, 500);
+            renderPlayerFreeRoll();
+            updateScore(500);
         } else {
             renderPlayerZilch();
         }
@@ -187,9 +185,11 @@ function renderPlayerZilch() {
     updateZilch();
     if (getCurrentPlayer().zilchRun === 3) {
         updateScore(-500);
+    }
+    renderZilch();
+    if (getCurrentPlayer().zilchRun === 3) {
         clearZilchRun();
     }
-    renderPlayerScores();
     changeCurrrentPlayer();
     renderTitle();
     updateScore(0);
@@ -250,6 +250,30 @@ bankButton.addEventListener('click', () => {
     clearZilchRun();
     changeCurrrentPlayer();
     renderTitle();
-
+    checkLastRound();
+    resetDice(1);
 });
 
+export function checkLastRound() {
+
+    const players = getPlayers();
+
+    const playerOne = players[0];
+    const playerTwo = players[1];
+
+    const winnerScore = 5000;
+
+    if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
+        if (playerOne.score >= winnerScore) {
+            playerOne.winner = true;
+            window.location = '../Results/';
+        }
+
+        if (playerTwo.score >= winnerScore) {
+            playerTwo.winner = true;
+            window.location = '../Results';
+
+        }
+    }
+
+}
