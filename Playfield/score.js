@@ -1,6 +1,6 @@
 import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers, setBankZero, increaseBank } from '../local-storage-utils.js';
 import diceJS from './dice.js';
-import { renderTitle, renderZilch } from './render.js';
+import { renderTitle, renderZilch, renderPlayerScores } from './render.js';
 
 const playerChoiceDiv = document.getElementById('player-choice');
 const diceList = document.getElementById('dice-list');
@@ -122,11 +122,19 @@ export function displayScoringOptions() {
     if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
             if (getCurrentPlayer().turnCount === 1) {
-                const choice = `No scoring dice: 500 pts`;
-                renderPlayerChoice(choice, notHeldArray, 500);
+                updateScore(0);
+                renderPlayerScores();
+                changeCurrrentPlayer();
+                renderTitle();
+                resetDice(1);
+                bankZero();
+                playerChoiceDiv.innerHTML = '';
+                diceArray.forEach(die => { die.isHeld = false; });
+                //const choice = `No scoring dice: 500 pts`; //give 500 points, reroll
+                //enderPlayerChoice(choice, notHeldArray, 500);
+            } else {
+                renderPlayerZilch();
             }
-            // renderPlayerFreeRoll();
-            // updateScore(500);  // do we need this?
         } else {
             renderPlayerZilch();
         }
@@ -214,9 +222,9 @@ function renderPlayerChoice(choice, scoringDice, score) {
             const held = document.getElementById(die.id);
             held.classList.add('held');
         });
-        const isHeldArray = diceArray.filter(die => die.isHeld);
+        const isHeldArray = diceArray.filter(die => die.isHeld === true);
 
-        if (isHeldArray.length === 6) {
+        if (isHeldArray.length === 6) {  // length is always 6..... impossible?! but reality
             renderPlayerFreeRoll();
             rollButton.textContent = 'Free Roll!';
         }
@@ -243,7 +251,7 @@ export function checkLastRound() {
     const playerOne = players[0];
     const playerTwo = players[1];
 
-    const winnerScore = 1000;
+    const winnerScore = 10000;
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
 
