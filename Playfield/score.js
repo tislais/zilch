@@ -227,7 +227,7 @@ function renderPlayerChoice(choice, scoringDice, score) {
             bankButton.disabled = false;
         }
 
-        choiceDiv.textContent = '';
+        choiceDiv.remove();
         rollButton.disabled = false;
 
     });
