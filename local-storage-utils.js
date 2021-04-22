@@ -24,7 +24,7 @@ export function createPlayers(nameOne, nameTwo) {
         roundScore: 0,
         score: 0,
         zilches: 0,
-        isTurn: true,
+        turnCount: 0,
         diceroll: 0,
         turn: true,
         zilchRun: 0,
@@ -36,7 +36,7 @@ export function createPlayers(nameOne, nameTwo) {
         roundScore: 0,
         score: 0,
         zilches: 0,
-        isTurn: false,
+        turnCount: 0,
         diceroll: 0,
         turn: false,
         zilchRun: 0,
@@ -46,7 +46,6 @@ export function createPlayers(nameOne, nameTwo) {
     const players = [playerOne, playerTwo];
 
     setPlayers(players);
-
 }
 
 export function updateScore(playerScore) {
@@ -58,11 +57,12 @@ export function updateScore(playerScore) {
     if (players[0].name === playerName) {
         players[0].score += playerScore;
         players[0].roundScore = playerScore;
+        players[0].turnCount += 1;
     }
     if (players[1].name === playerName) {
         players[1].score += playerScore;
         players[1].roundScore = playerScore;
-
+        players[1].turnCount += 1;
     }
 
     setPlayers(players);
@@ -70,6 +70,7 @@ export function updateScore(playerScore) {
 
 
 export function clearZilchRun() {
+
     let players = getPlayers();
 
     const playerName = getCurrentPlayer().name;
@@ -84,7 +85,6 @@ export function clearZilchRun() {
     }
 
     setPlayers(players);
-
 }
 
 export function updateZilch() {

@@ -241,7 +241,7 @@ export function checkLastRound() {
     const playerOne = players[0];
     const playerTwo = players[1];
 
-    const winnerScore = 5000;
+    const winnerScore = 1000;
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
         if (playerOne.score >= winnerScore) {
