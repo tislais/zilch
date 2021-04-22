@@ -56,17 +56,23 @@ test('time to test createPlayers. will create players', (expect) => {
     const playerOne = {
         name: 'john',
         score: 0,
-        zilches: 0,
         isTurn: true,
         diceroll: 0,
+        turn: true,
+        zilchRun: 0,
+        zilches: 0,
+        roundScore: 0
     };
 
     const playerTwo = {
         name: 'sarah',
         score: 0,
-        zilches: 0,
         isTurn: false,
         diceroll: 0,
+        turn: false,
+        zilchRun: 0,
+        zilches: 0,
+        roundScore: 0
     };
 
     createPlayers('john', 'sarah');
