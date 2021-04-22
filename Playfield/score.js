@@ -40,6 +40,18 @@ export function displayScoringOptions() {
     let fives = fivesObject.length;
     let sixes = sixesObject.length;
 
+    const numbersArray = [ones, twos, threes, fours, fives, sixes];
+    const matchingPairs = numbersArray.filter(pair => pair === 2);
+    
+
+    if (matchingPairs.length === 3) {
+        const choice = `3 Pairs: 1500 pts`;
+        renderPlayerChoice(choice, diceArray, 1500);
+        possibleScoringDice++;
+    }
+    //If there are three pairs of matching dice in one roll
+    
+
     if (ones >= 3) {
 
         const score = calculateScore(500, ones);
