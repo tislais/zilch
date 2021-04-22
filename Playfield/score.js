@@ -176,6 +176,10 @@ export function resetDice(one) {
 }
 
 function renderPlayerZilch() {
+    const zilchText = document.createElement('div');
+    zilchText.textContent = 'Zilch!';
+    zilchText.classList.add('zilch-text');
+    playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;
     updateZilch();
