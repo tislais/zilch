@@ -10,7 +10,7 @@ const form = document.getElementById('form');
 const inputOne = document.getElementById('player-one-name');
 const inputTwo = document.getElementById('player-two-name');
 const rulesButton = document.getElementById('rules-button');
-const rulesSection = document.querySelector('section');
+const rulesSection = document.querySelector('ol');
 const playerSetScore = document.getElementById('set-score');
 
 form.addEventListener('submit', (e) => {
