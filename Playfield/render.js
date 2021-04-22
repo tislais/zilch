@@ -7,10 +7,10 @@ const title = document.querySelector('span');
 
 export function renderPlayerScores() {
 
-    const playerOne = getPlayers()[0];
-    const playerTwo = getPlayers()[1];
+    let playerOne = getPlayers()[0];
+    let playerTwo = getPlayers()[1];
 
-    const player = getCurrentPlayer();
+    let player = getCurrentPlayer();
 
     let totalScore = player.score;
     let roundScore = player.roundScore;

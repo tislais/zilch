@@ -1,7 +1,6 @@
-import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers } from '../local-storage-utils.js';
+import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers, setBankZero, increaseBank } from '../local-storage-utils.js';
 import diceJS from './dice.js';
-import { renderPlayerScores, renderTitle, renderZilch } from './render.js';
-import { disableRoll } from './playfield.js';
+import { renderTitle, renderZilch } from './render.js';
 
 const playerChoiceDiv = document.getElementById('player-choice');
 const diceList = document.getElementById('dice-list');
@@ -12,9 +11,7 @@ const diceArray = diceJS;
 
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
 
-renderTitle();
-
-function calculateScore(number, arrayL) {
+export function calculateScore(number, arrayL) {
     let i = 3;
 
     while (i <= arrayL) {
@@ -136,20 +133,15 @@ export function displayScoringOptions() {
     }
 }
 
-let bankValue = 0;
-
 export function bankZero() {
 
-    bankValue = 0;
+    setBankZero();
 
-    bankButton.textContent = `Bank: ${bankValue}`;
+    bankButton.textContent = `Bank: ${getCurrentPlayer().bank}`;
 
     bankButton.disabled = true;
 
-    return bankValue;
 }
-
-bankZero();
 
 export function resetDice(one) {
     for (let die of diceArray) {
@@ -180,7 +172,6 @@ export function resetDice(one) {
 
 function renderPlayerZilch() {
     bankButton.disabled = true;
-    bankValue = 0;
     rollButton.disabled = false;
     updateZilch();
     if (getCurrentPlayer().zilchRun === 3) {
@@ -190,9 +181,10 @@ function renderPlayerZilch() {
     if (getCurrentPlayer().zilchRun === 3) {
         clearZilchRun();
     }
-    changeCurrrentPlayer();
-    renderTitle();
     updateScore(0);
+    changeCurrrentPlayer();
+    setBankZero();
+    renderTitle();
     resetDice(1);
     bankButton.textContent = 'Bank';
 }
@@ -229,11 +221,11 @@ function renderPlayerChoice(choice, scoringDice, score) {
             rollButton.textContent = 'Free Roll!';
         }
 
-        bankValue += score;
+        increaseBank(score);
         disableRoll(true);
-        bankButton.textContent = `Bank ${bankValue}`;
+        bankButton.textContent = `Bank ${getCurrentPlayer().bank}`;
 
-        if (bankValue > 299) {
+        if (getCurrentPlayer().bank > 299) {
             bankButton.disabled = false;
         }
 
@@ -243,16 +235,6 @@ function renderPlayerChoice(choice, scoringDice, score) {
     });
 
 }
-
-bankButton.addEventListener('click', () => {
-    updateScore(bankValue);
-    renderPlayerScores();
-    clearZilchRun();
-    changeCurrrentPlayer();
-    renderTitle();
-    checkLastRound();
-    resetDice(1);
-});
 
 export function checkLastRound() {
 
@@ -276,4 +258,48 @@ export function checkLastRound() {
         }
     }
 
+}
+
+const generateRandomNumber = function () {
+    return Math.floor((Math.random() * 6) + 1);
+};
+
+export function renderDiceValue(array) {
+    diceList.innerHTML = '';
+    const currentRoll = [];
+    for (let arrayitem of array) {
+        const die = document.createElement('i');
+        die.classList.add('fas');
+
+        die.setAttribute('id', arrayitem.id);
+        if (!arrayitem.isHeld) {
+            setTimeout(function () { die.classList.add('roll'); }, 1);
+            die.classList.remove('roll');
+            arrayitem.number = generateRandomNumber();
+
+        } else if (arrayitem.isHeld) {
+
+            die.classList.add('held');
+        }
+
+        currentRoll.push(arrayitem.number);
+        if (arrayitem.number === 1) {
+            die.classList.add('fa-dice-one');
+        } else if (arrayitem.number === 2) {
+            die.classList.add('fa-dice-two');
+        } else if (arrayitem.number === 3) {
+            die.classList.add('fa-dice-three');
+        } else if (arrayitem.number === 4) {
+            die.classList.add('fa-dice-four');
+        } else if (arrayitem.number === 5) {
+            die.classList.add('fa-dice-five');
+        } else if (arrayitem.number === 6) {
+            die.classList.add('fa-dice-six');
+        }
+        diceList.append(die);
+    }
+}
+
+export function disableRoll(bankValue, boolean) {
+    rollButton.disabled = boolean;
 }

@@ -28,6 +28,7 @@ export function createPlayers(nameOne, nameTwo) {
         diceroll: 0,
         turn: true,
         zilchRun: 0,
+        bank: 0
     };
 
     const playerTwo = {
@@ -39,6 +40,7 @@ export function createPlayers(nameOne, nameTwo) {
         diceroll: 0,
         turn: false,
         zilchRun: 0,
+        bank: 0
     };
 
     const players = [playerOne, playerTwo];
@@ -51,7 +53,7 @@ export function updateScore(playerScore) {
 
     let players = getPlayers();
 
-    const playerName = getCurrentPlayer().name; //thanks tis
+    let playerName = getCurrentPlayer().name; //thanks tis
 
     if (players[0].name === playerName) {
         players[0].score += playerScore;
@@ -115,9 +117,46 @@ export function changeCurrrentPlayer() {
 }
 
 export function getCurrentPlayer() {
+
     const players = getPlayers();
 
     for (let player of players) {
         if (player.turn === true) return player;
     }
+}
+
+export function setBankZero() {
+
+    let players = getPlayers();
+
+    const playerName = getCurrentPlayer().name;
+
+    if (players[0].name === playerName) {
+        players[0].bank = 0;
+
+    }
+    if (players[1].name === playerName) {
+        players[1].bank = 0;
+
+    }
+
+    setPlayers(players);
+
+}
+
+export function increaseBank(score) {
+
+    let players = getPlayers();
+
+    const playerName = getCurrentPlayer().name; //thanks tis
+
+    if (players[0].name === playerName) {
+        players[0].bank = players[0].bank + score;
+    }
+    if (players[1].name === playerName) {
+        players[1].bank = players[1].bank + score;
+    }
+
+    setPlayers(players);
+
 }
