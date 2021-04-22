@@ -37,6 +37,10 @@ body {
     text-align: center;
 }
 
+.inner-playfield {
+    width: 508px;
+}
+
 .inner-playfield h1 {
     font-size: 26px;
 }
@@ -131,6 +135,7 @@ th, td {
     display: flex;
     flex-wrap: wrap;
     width: 508px;
+    position: relative;
 }
 
 #player-choice div {
@@ -152,8 +157,8 @@ th, td {
     width: auto;
     transform: rotate(351deg);
     position: absolute;
-    left: 370px;
-    top: 390px;
+    left: 83px;
+    top: 40px;
     color: #47d2f7;
 }
 
