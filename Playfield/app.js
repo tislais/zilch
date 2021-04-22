@@ -40,6 +40,7 @@ bankButton.addEventListener('click', () => {
     bankZero();
     playerChoiceDiv.innerHTML = '';
     dice.forEach(die => { die.isHeld = false; });
+    rollButton.textContent = 'Roll';
 });
 
 rollButton.addEventListener('click', () => {
