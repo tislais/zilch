@@ -1,3 +1,4 @@
+
 import { getPlayers, getCurrentPlayer } from '../local-storage-utils.js';
 
 const playerOneTable = document.getElementById('player-one-table');
@@ -47,7 +48,7 @@ export function renderZilch() {
     const playerRoundScore = document.createElement('td');
     const playerTotalScore = document.createElement('td');
 
-    zilchText.textContent = 'ZILCH';
+    zilchText.textContent = 'ZILCH!';
     playerRoundScore.textContent = totalScore;
     playerTotalScore.textContent = '-500';
 
