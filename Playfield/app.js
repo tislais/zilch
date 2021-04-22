@@ -16,7 +16,6 @@ let dice = diceJS;
 
 let players = getPlayers();
 
-
 renderTitle();
 
 player1Name.textContent = players[0].name;
