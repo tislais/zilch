@@ -1,4 +1,4 @@
-import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers, setBankZero, increaseBank } from '../local-storage-utils.js';
+import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, updateZilch, getPlayers, setBankZero, increaseBank, getWinningScore } from '../local-storage-utils.js';
 import diceJS from './dice.js';
 import { renderTitle, renderZilch, renderPlayerScores } from './render.js';
 
@@ -244,17 +244,23 @@ function renderPlayerChoice(choice, scoringDice, score) {
 
 }
 
+
+
+
+
 export function checkLastRound() {
 
+    
+    
     const players = getPlayers();
 
     const playerOne = players[0];
     const playerTwo = players[1];
 
-    const winnerScore = 10000;
+    const winnerScore = getWinningScore();
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
-
+        console.log(playerOne.score, playerTwo.score, winnerScore);
         if (playerOne.score >= winnerScore) {
             playerOne.lastRound = true;
             window.location = '../Results/';
