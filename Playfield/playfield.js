@@ -17,7 +17,7 @@ player2Name.textContent = players[1].name;
 
 let dice = diceJS;
 
-const generateRandomNumber = function () {
+const generateRandomNumber = function() {
     return Math.floor((Math.random() * 6) + 1);
 };
 
@@ -32,7 +32,7 @@ function renderDiceValue(array) {
 
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
-            setTimeout(function () { die.classList.add('roll'); }, 1);
+            setTimeout(function() { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
 
