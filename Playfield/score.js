@@ -121,10 +121,12 @@ export function displayScoringOptions() {
 
     if (possibleScoringDice === 0) {
         if (notHeldArray.length === 6) {
-            // const choice = `No scoring dice: 500 pts`;
-            // renderPlayerChoice(choice, notHeldArray, 500);
-            renderPlayerFreeRoll();
-            updateScore(500);
+            if (getCurrentPlayer().turnCount === 1) {
+                const choice = `No scoring dice: 500 pts`;
+                renderPlayerChoice(choice, notHeldArray, 500);
+            }
+            // renderPlayerFreeRoll();
+            // updateScore(500);  // do we need this?
         } else {
             renderPlayerZilch();
         }
@@ -244,15 +246,15 @@ export function checkLastRound() {
     const winnerScore = 1000;
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
+
         if (playerOne.score >= winnerScore) {
-            playerOne.winner = true;
+            playerOne.lastRound = true;
             window.location = '../Results/';
         }
 
         if (playerTwo.score >= winnerScore) {
-            playerTwo.winner = true;
+            playerTwo.lastRound = true;
             window.location = '../Results';
-
         }
     }
 
