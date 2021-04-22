@@ -53,14 +53,6 @@ header {
     box-shadow: var(--shadow);
 }
 
-footer {
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--color3);
-    box-shadow: var(--shadow);
-}
-
-
 h2 {
     font-size: 1.8rem;
     font-weight: bold;
@@ -85,10 +77,10 @@ p {
 footer {
     position: fixed;
     width: 100%;
-    bottom: 0;
     height: var(--footer-height);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    bottom: 0;
     background-color: var(--color3);
     box-shadow: var(--shadow);
 }

@@ -50,9 +50,9 @@ export function createPlayers(nameOne, nameTwo) {
 
 export function updateScore(playerScore) {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
-    let playerName = getCurrentPlayer().name; //thanks tis
+    const playerName = getCurrentPlayer().name; //thanks tis
 
     if (players[0].name === playerName) {
         players[0].score += playerScore;
@@ -71,7 +71,7 @@ export function updateScore(playerScore) {
 
 export function clearZilchRun() {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
     const playerName = getCurrentPlayer().name;
 
@@ -89,7 +89,7 @@ export function clearZilchRun() {
 
 export function updateZilch() {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
     const playerName = getCurrentPlayer().name;
 
@@ -108,7 +108,7 @@ export function updateZilch() {
 
 export function changeCurrrentPlayer() {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
     players[0].turn = !players[0].turn;
     players[1].turn = !players[1].turn;
@@ -127,7 +127,7 @@ export function getCurrentPlayer() {
 
 export function setBankZero() {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
     const playerName = getCurrentPlayer().name;
 
@@ -146,7 +146,7 @@ export function setBankZero() {
 
 export function increaseBank(score) {
 
-    let players = getPlayers();
+    const players = getPlayers();
 
     const playerName = getCurrentPlayer().name; //thanks tis
 

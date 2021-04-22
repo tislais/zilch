@@ -7,7 +7,6 @@ const diceList = document.getElementById('dice-list');
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
 
-
 const diceArray = diceJS;
 
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
@@ -130,8 +129,6 @@ export function displayScoringOptions() {
                 bankZero();
                 playerChoiceDiv.innerHTML = '';
                 diceArray.forEach(die => { die.isHeld = false; });
-                //const choice = `No scoring dice: 500 pts`; //give 500 points, reroll
-                //enderPlayerChoice(choice, notHeldArray, 500);
             } else {
                 renderPlayerZilch();
             }
@@ -308,6 +305,6 @@ export function renderDiceValue(array) {
     }
 }
 
-export function disableRoll(bankValue, boolean) {
+export function disableRoll(boolean) {
     rollButton.disabled = boolean;
 }
