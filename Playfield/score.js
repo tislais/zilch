@@ -7,6 +7,7 @@ const diceList = document.getElementById('dice-list');
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
 
+
 const diceArray = diceJS;
 
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
@@ -240,7 +241,7 @@ export function checkLastRound() {
     const playerOne = players[0];
     const playerTwo = players[1];
 
-    const winnerScore = 5000;
+    const winnerScore = 1000;
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
         if (playerOne.score >= winnerScore) {
