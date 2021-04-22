@@ -1,14 +1,54 @@
 /* add home page styles here */
 body {
     padding: 60px;
+    background-color: #efefef;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.playfield {
+    width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border: 1px dotted #ddd;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 20px 20px 0px rgb(0 0 0 / 12%);
+    height: 600px;
+}
+
+.side {
+    color: #222;
+}
+
+.side, 
+.inner-playfield {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 h2 {
     font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
 #player-choice {
     margin-top: 40px;
+}
+
+#player-choice div {
+    padding: 20px;
+    border: 1px solid #eee;
+    width: 160px;
 }
 
 #dice-list {
