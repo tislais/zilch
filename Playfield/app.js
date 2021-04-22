@@ -3,9 +3,11 @@ import { updateScore, clearZilchRun, changeCurrrentPlayer, getCurrentPlayer, get
 import { checkLastRound, resetDice, bankZero, renderDiceValue, displayScoringOptions } from './score.js';
 import diceJS from './dice.js';
 
-
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
+const rulesButton = document.getElementById('rules-button');
+const rulesSection = document.querySelector('section');
+
 
 const player1Name = document.getElementById('player-1-name');
 const player2Name = document.getElementById('player-2-name');
@@ -22,6 +24,8 @@ renderTitle();
 
 player1Name.textContent = players[0].name;
 player2Name.textContent = players[1].name;
+
+resetDice(1);
 
 bankButton.disabled = true;
 
@@ -44,4 +48,12 @@ rollButton.addEventListener('click', () => {
     renderDiceValue(dice);
     displayScoringOptions();
     rollButton.textContent = 'Roll';
+});
+
+rulesButton.addEventListener('click', () => {
+    if (rulesSection.style.display === 'none') {
+        rulesSection.style.display = 'block';
+    } else {
+        rulesSection.style.display = 'none';
+    }
 });
