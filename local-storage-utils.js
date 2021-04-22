@@ -1,4 +1,5 @@
 const PLAYERS = 'PLAYERS';
+const WINNINGSCORE = 'WINNINGSCORE';
 
 export function setPlayers(players) { // takes player array and sets them in local storage
 
@@ -15,6 +16,21 @@ export function getPlayers() {  // gets local storage and returns array
     const parsedPlayers = JSON.parse(stringyPlayers);
 
     return parsedPlayers;
+}
+
+export function setWinningScore(score) {
+    const stringyScore = JSON.stringify(score);
+
+    localStorage.setItem(WINNINGSCORE, stringyScore);
+}
+
+export function getWinningScore() {  // gets local storage and returns array
+
+    const stringyScore = localStorage.getItem(WINNINGSCORE);
+
+    const parsedScore = JSON.parse(stringyScore);
+
+    return parsedScore;
 }
 
 export function createPlayers(nameOne, nameTwo) {

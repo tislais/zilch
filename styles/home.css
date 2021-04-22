@@ -1,7 +1,11 @@
 /* add home page styles here */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
 body {
     padding: 60px;
-    background-color: #efefef;
+    background: rgb(31,27,98);
+    background: linear-gradient(75deg, rgba(31,27,98,1) 0%, rgba(163,38,179,1) 33%, rgba(66,219,250,1) 100%);
+    font-family: 'Open Sans', sans-serif;
 }
 
 .wrap {
@@ -12,11 +16,11 @@ body {
 }
 
 .playfield {
-    width: 800px;
+    width: fit-content;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     border: 1px dotted #ddd;
-    padding: 40px;
+    padding: 40px 0;
     background: #fff;
     box-shadow: 20px 20px 0px rgb(0 0 0 / 12%);
     height: 600px;
@@ -24,6 +28,8 @@ body {
 
 .side {
     color: #222;
+    width: 100%;
+    padding: 0 15px;
 }
 
 .side, 
@@ -31,40 +37,129 @@ body {
     text-align: center;
 }
 
+.inner-playfield h1 {
+    font-size: 26px;
+}
+
+.player-1-side {
+    border-right: 1px solid #ccc;
+}
+
+.player-2-side {
+    border-left: 1px solid #ccc;
+}
+
+.roll-bank-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.roll-bank-buttons button {    
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+
+.roll-bank-buttons button:enabled {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#roll-button:enabled {
+    background-color: #865bc8;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+#bank-button:enabled {
+    color: white;
+    background-color: #58ce53;
+}
+
+.inner-playfield button {
+    font-size: 20px;
+}
+
+.inner-playfield button,
+#player-choice div {
+    margin: 0 20px;
+    width: 200px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
-h2 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+thead tr {
+    border-bottom: 3px solid #a326b3;
+    font-weight: 700;
 }
+
+.playfield h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    width: 130px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+table td:first-child {
+    text-align: right;
+    border-right: 1px solid #cacaca;
+}
+
+th, td {
+    padding: 5px 10px;
+    text-align: right;
+}
+
 
 #player-choice {
     margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #player-choice div {
     padding: 20px;
-    border: 1px solid #eee;
-    width: 160px;
+    border: 1px solid #a326b3;
+    cursor: pointer;
+    color: #a326b3;
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
 #dice-list {
     display: flex;
     list-style-type: none;
     font-size: 1.6rem;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 #dice-list i {
-    margin: 10px;
-    font-size: 3.5rem;
+    margin: 0 10px;
+    font-size: 4rem;
     color: #333;
 }
 
 #dice-list i.held {
-    color: #c00;
+    color: #5ea8e6;
 }
 
 .roll {
