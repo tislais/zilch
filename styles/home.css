@@ -46,8 +46,26 @@ body {
     flex-direction: row;
 }
 
+.roll-bank-buttons button:enabled {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#roll-button:enabled {
+    background-color: #865bc8;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+#bank-button:enabled {
+    color: white;
+    background-color: #58ce53;
+}
+
 .inner-playfield button {
-    font-size: 1.6rem;
+    font-size: 20px;
 }
 
 .inner-playfield button,
@@ -75,11 +93,13 @@ h2 {
 #player-choice {
     margin-top: 40px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 #player-choice div {
     padding: 20px;
     border: 1px solid #eee;
+    cursor: pointer;
 }
 
 #dice-list {
@@ -97,7 +117,7 @@ h2 {
 }
 
 #dice-list i.held {
-    color: #c00;
+    color: #5ea8e6;
 }
 
 .roll {
