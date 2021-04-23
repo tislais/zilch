@@ -189,3 +189,6 @@ th, td {
     transition: transform 500ms cubic-bezier(0, 0.13, 0.92, 1.03);
 }
 
+* {
+    font-family: 'FiraSansRegular'; 
+}

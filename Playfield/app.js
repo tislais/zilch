@@ -14,8 +14,6 @@ const player2Name = document.getElementById('player-2-name');
 
 const playerChoiceDiv = document.getElementById('player-choice');
 
-
-
 let dice = diceJS;
 
 let players = getPlayers();
