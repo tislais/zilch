@@ -138,7 +138,7 @@ export function displayScoringOptions() {
                 renderPlayerScores();
                 changeCurrrentPlayer();
                 renderTitle();
-                resetDice(1);
+                //resetDice(1);
                 bankZero();
                 playerChoiceDiv.innerHTML = '';
                 diceArray.forEach(die => { die.isHeld = false; });
@@ -192,7 +192,7 @@ function renderPlayerZilch() {
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
-    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 1);
+    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 500);
     playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;
@@ -208,7 +208,8 @@ function renderPlayerZilch() {
     changeCurrrentPlayer();
     setBankZero();
     renderTitle();
-    resetDice(1); // will go away
+    addNotHeldClass();
+    //resetDice(1); // will go away
     // notHeld class add
     bankButton.textContent = 'Bank';
 }
@@ -326,4 +327,14 @@ export function renderDiceValue(array) {
 
 export function disableRoll(boolean) {
     rollButton.disabled = boolean;
+}
+
+export function addNotHeldClass() {
+    const expList = document.querySelectorAll('i');
+
+    for (let i = 0; i < 6; i++) {
+        if (diceArray[i].isHeld === false) {
+            expList[i].classList.add('notHeld');
+        }
+    }
 }
