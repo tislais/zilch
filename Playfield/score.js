@@ -278,7 +278,6 @@ export function checkLastRound() { // check to see if either player has reach wi
             window.location = '../Results';
         }
     }
-
 }
 
 const generateRandomNumber = function () {  //generates random number 1-6 for each dice
@@ -294,7 +293,7 @@ export function renderDiceValue(array) { //always passed dice array
 
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
-            setTimeout(function () { die.classList.add('roll'); }, 1);
+            setTimeout(function() { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
 

@@ -68,7 +68,14 @@ rulesModal.addEventListener('click', (e) => {
     }
 });
 
-rulesModalClose.addEventListener('click', (e) => {
+scoringModal.addEventListener('click', (e) => {
+    scoringModal.style.display = 'none';
+    if (e.target === scoringModal) {
+        scoringModal.style.display = 'none';
+    }
+});
+
+rulesModalClose.addEventListener('click', () => {
     rulesModal.style.display = 'none';
 });
 
@@ -80,6 +87,6 @@ scoringButton.addEventListener('click', () => {
     }
 });
 
-scoringModalClose.addEventListener('click', (e) => {
+scoringModalClose.addEventListener('click', () => {
     scoringModal.style.display = 'none';
 });
