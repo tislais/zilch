@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -17,7 +16,7 @@
 
 <body>
     <header>
-        <h1>Zilch: A Dice Game</h1>
+        <h1>Zilch: The Dice Game</h1>
     </header>
     <main>
         <form id="form">
@@ -27,9 +26,10 @@
             <h2>Player Two's Name</h2>
             <input type="text" id="player-two-name" name="test" required>
 
+            <h2>Goal</h2><input id="set-score" type="number" value="10000" min="1000" required>
+
             <button>Play!</button>
 
-            <input id="set-score" type="number" value="10000" min="1000" required>
         </form>
 
         <ol>
