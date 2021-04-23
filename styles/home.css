@@ -20,11 +20,48 @@ body {
     width: fit-content;
     display: grid;
     grid-template-columns: 200px auto 200px;
-    border: 1px dotted #ddd;
     padding: 40px 0;
     background: #fff;
     box-shadow: 20px 20px 0px rgb(0 0 0 / 12%);
     min-height: 600px;
+}
+
+.results {
+    padding: 40px 0;
+    background: #fff;
+    box-shadow: 20px 20px 0px rgb(0 0 0 / 12%); 
+    width: 600px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.results table {
+    width: 400px;
+    margin: 20px 0;
+}
+
+.results table td:first-child {
+    border: 0;
+}
+
+.results h1 {    
+    text-align: center;
+}
+
+.results button {
+    padding: 15px 40px;
+    margin: 20px;
+    background-color: #865bc8;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font-family: 'Open Sans';
+    border-radius: 4px;
+    font-family: 'Open Sans';
+    font-size: 16px;
 }
 
 .side {
