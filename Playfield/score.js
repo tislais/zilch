@@ -26,6 +26,7 @@ export function displayScoringOptions() {
     let possibleScoringDice = 0;
 
     notHeldArray = diceArray.filter(dice => !dice.isHeld);
+
     const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false);
     const twosObject = diceArray.filter(dice => dice.number === 2 && dice.isHeld === false);
     const threesObject = diceArray.filter(dice => dice.number === 3 && dice.isHeld === false);
@@ -195,7 +196,8 @@ function renderPlayerZilch() {
     changeCurrrentPlayer();
     setBankZero();
     renderTitle();
-    resetDice(1);
+    resetDice(1); // will go away
+    // notHeld class add
     bankButton.textContent = 'Bank';
 }
 
@@ -246,14 +248,8 @@ function renderPlayerChoice(choice, scoringDice, score) {
 
 }
 
-
-
-
-
 export function checkLastRound() {
 
-    
-    
     const players = getPlayers();
 
     const playerOne = players[0];
@@ -262,7 +258,6 @@ export function checkLastRound() {
     const winnerScore = getWinningScore();
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
-        console.log(playerOne.score, playerTwo.score, winnerScore);
         if (playerOne.score >= winnerScore) {
             playerOne.lastRound = true;
             window.location = '../Results/';
@@ -293,9 +288,10 @@ export function renderDiceValue(array) {
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
 
-        } else if (arrayitem.isHeld) {
-
+        } if (arrayitem.isHeld) {
             die.classList.add('held');
+        } if (arrayitem.isHeld === false) {
+            die.classList.add('notHeld');
         }
 
         currentRoll.push(arrayitem.number);
