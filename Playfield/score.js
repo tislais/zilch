@@ -299,9 +299,9 @@ export function renderDiceValue(array) { //always passed dice array
 
         } if (arrayitem.isHeld) {
             die.classList.add('held');
-        } if (arrayitem.isHeld === false) {
-            die.classList.add('notHeld');
-        }
+        } //if (arrayitem.isHeld === false) {
+        //     die.classList.add('notHeld');
+        // }
 
         currentRoll.push(arrayitem.number);
         if (arrayitem.number === 1) {
@@ -329,7 +329,7 @@ export function disableRoll(boolean) {  //called once to disable roll button. RO
 function addNotHeldClass() {
     const expList = document.querySelectorAll('i');
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         if (diceArray[i].isHeld === false) {
             expList[i].classList.add('notHeld');
         }
