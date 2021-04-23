@@ -180,6 +180,7 @@ function renderPlayerZilch() {
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
+    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 1);
     playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;

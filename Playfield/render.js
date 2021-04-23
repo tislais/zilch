@@ -47,6 +47,9 @@ export function renderZilch() {
     const zilchText = document.createElement('td');
     const playerRoundScore = document.createElement('td');
     const playerTotalScore = document.createElement('td');
+    const thirdZilchTd = document.createElement('td');
+
+    thirdZilchTd.textContent = 'ZILCH! -500';
 
     zilchText.textContent = 'ZILCH!';
     playerRoundScore.textContent = totalScore;
@@ -54,7 +57,7 @@ export function renderZilch() {
 
     if (playerOne.turn === true) {
         if (player.zilchRun === 3) {
-            newTr.append(zilchText, playerRoundScore, playerTotalScore);
+            newTr.append(thirdZilchTd, playerRoundScore);
         } else {
             newTr.append(zilchText, playerRoundScore);
         }
@@ -64,7 +67,8 @@ export function renderZilch() {
 
     if (playerTwo.turn === true) {
         if (player.zilchRun === 3) {
-            newTr.append(zilchText, playerRoundScore, playerTotalScore);
+            newTr.append(thirdZilchTd, playerRoundScore);
+            console.log('third zilch');
         } else {
             newTr.append(zilchText, playerRoundScore);
         }
