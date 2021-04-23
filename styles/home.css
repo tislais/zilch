@@ -472,6 +472,15 @@ p {
     font-size: 13px;
 }
 
+.credits {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.credits h4 {
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0, .5);
+}
 
   
 /* .notHeld {
