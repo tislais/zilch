@@ -43,9 +43,9 @@ section {
     border: solid 2px var(--color1);
 }
 
-ol {
+/* ol {
     color: white;
-}
+} */
 
 li {
     font-weight: bold;

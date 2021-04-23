@@ -14,6 +14,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .playfield {
@@ -23,7 +25,7 @@ body {
     padding: 40px 0;
     background: #fff;
     box-shadow: 20px 20px 0px rgb(0 0 0 / 12%);
-    min-height: 600px;
+    min-height: 560px;
 }
 
 .results {
@@ -255,10 +257,144 @@ ol > li {
     font-weight: bolder;
 }
 
-* {
-    font-family: 'FiraSansRegular'; 
+
+#rules-button,
+#scoring-button {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 6px;
+    margin-top: 20px;
+    background-color: #00000061;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
 }
 
-#rules-button {
-    background: rgba(137, 86, 198, .3)
+
+.info-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#scoring-button {
+    margin-left: 10px;
+}
+
+#rules-modal,
+#scoring-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+}
+
+#scoring-modal {
+    text-align: center;
+    display: none;
+}
+
+#rules-modal {
+    text-align: center;
+    display: none;
+}
+
+#scoring-modal button,
+#rules-modal button {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 6px;
+    margin-top: 20px;
+    background-color: #a326b3;
+    color: white;
+}
+
+.rules-modal-inner {
+    text-align: left;
+}
+
+.rules-modal-wrap,
+.scoring-modal-wrap {
+    color: #222;
+    background-color: #fff;
+    width: 680px;
+    margin: 50px auto;
+    padding: 40px 60px;
+    font-weight: 300;
+}
+
+.rules-modal-wrap h2,
+.scoring-modal-wrap h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #999;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.subtext {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.scoring-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.scoring-modal-grid i {
+    font-size: 30px;
+    margin: 4px;
+    color: #333;
+}
+
+.scoring-modal-grid h3 {
+    margin: 10px 0;
+}
+
+.scoring-modal-half {
+    text-align: left;
+}
+
+.scoring-modal-half div,
+.scoring-modal-half span {
+    font-weight: 500;
+}
+
+.scoring-dice {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.scoring-modal-half span {
+    margin-left: 6px;
+}
+
+.modal-footer {
+    text-align: center; 
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 13px;
 }
