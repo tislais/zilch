@@ -135,7 +135,7 @@ export function displayScoringOptions() { // calculates scores on every roll
                 renderPlayerScores();
                 changeCurrrentPlayer();
                 renderTitle();
-                //resetDice(1);
+                resetDice(1);
                 bankZero();
                 playerChoiceDiv.innerHTML = '';
                 diceArray.forEach(die => { die.isHeld = false; });
@@ -164,25 +164,25 @@ export function resetDice(one) { // makes it so user hasn't selected each dice a
         die.number = one;
         one++;
     }
-    diceList.innerHTML = '';  // render dice on page
-    for (let arrayitem of diceArray) {
-        const die = document.createElement('i');
-        die.classList.add('fas');
-        if (arrayitem.number === 1) {
-            die.classList.add('fa-dice-one');
-        } else if (arrayitem.number === 2) {
-            die.classList.add('fa-dice-two');
-        } else if (arrayitem.number === 3) {
-            die.classList.add('fa-dice-three');
-        } else if (arrayitem.number === 4) {
-            die.classList.add('fa-dice-four');
-        } else if (arrayitem.number === 5) {
-            die.classList.add('fa-dice-five');
-        } else if (arrayitem.number === 6) {
-            die.classList.add('fa-dice-six');
-        }
-        diceList.append(die);
-    }
+    // diceList.innerHTML = '';  // render dice on page
+    // for (let arrayitem of diceArray) {
+    //     const die = document.createElement('i');
+    //     die.classList.add('fas');
+    //     if (arrayitem.number === 1) {
+    //         die.classList.add('fa-dice-one');
+    //     } else if (arrayitem.number === 2) {
+    //         die.classList.add('fa-dice-two');
+    //     } else if (arrayitem.number === 3) {
+    //         die.classList.add('fa-dice-three');
+    //     } else if (arrayitem.number === 4) {
+    //         die.classList.add('fa-dice-four');
+    //     } else if (arrayitem.number === 5) {
+    //         die.classList.add('fa-dice-five');
+    //     } else if (arrayitem.number === 6) {
+    //         die.classList.add('fa-dice-six');
+    //     }
+    //     diceList.append(die);
+    // }
 }
 
 function renderPlayerZilch() {  //called when player gets zero scoring dice (other than first turn)
@@ -206,7 +206,7 @@ function renderPlayerZilch() {  //called when player gets zero scoring dice (oth
     setBankZero();
     renderTitle();
     addNotHeldClass();
-    //resetDice(1); // will go away
+    resetDice(1); // will go away
     // notHeld class add
     bankButton.textContent = 'Bank';
 }
