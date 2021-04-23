@@ -5,6 +5,7 @@ body {
     padding: 60px;
     background: rgb(31,27,98);
     background: linear-gradient(75deg, rgba(31,27,98,1) 0%, rgba(163,38,179,1) 33%, rgba(66,219,250,1) 100%);
+    background-attachment: fixed;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -56,6 +57,7 @@ body {
 .roll-bank-buttons {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .roll-bank-buttons button {    
@@ -136,6 +138,7 @@ th, td {
     flex-wrap: wrap;
     width: 508px;
     position: relative;
+    justify-content: center;
 }
 
 #player-choice div {
@@ -155,11 +158,20 @@ th, td {
     border: 0;
     font-size: 80px;
     width: auto;
-    transform: rotate(351deg);
     position: absolute;
     left: 83px;
     top: 40px;
     color: #47d2f7;
+}
+
+#player-choice div.zilch-text-animate {
+    transform: scale(1.6) rotate(351deg);
+    -webkit-transition: -webkit-transform 300ms ease-out;
+    -moz-transition:    -moz-transform 300ms ease-out;
+    -o-transition:      -o-transform 300ms ease-out;
+    -ms-transition:     -ms-transform 300ms ease-out;
+    transition: transform 300ms cubic-bezier(0, 0.13, 0.92, 1.03);
+
 }
 
 #dice-list {
