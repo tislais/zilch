@@ -482,6 +482,16 @@ p {
     border-bottom: 1px solid rgba(0,0,0, .5);
 }
 
+.login button {
+    padding: 10px 30px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
   
 /* .notHeld {
 animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
