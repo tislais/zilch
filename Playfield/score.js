@@ -280,7 +280,7 @@ export function checkLastRound() { // check to see if either player has reach wi
     }
 }
 
-const generateRandomNumber = function () {  //generates random number 1-6 for each dice
+const generateRandomNumber = function() {  //generates random number 1-6 for each dice
     return Math.floor((Math.random() * 6) + 1);
 };
 
