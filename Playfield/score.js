@@ -2,8 +2,8 @@ import { changeCurrrentPlayer, clearZilchRun, getCurrentPlayer, updateScore, upd
 import diceJS from './dice.js';
 import { renderTitle, renderZilch, renderPlayerScores } from './render.js';
 
-const playerChoiceDiv = document.getElementById('player-choice');
-const diceList = document.getElementById('dice-list');
+const playerChoiceDiv = document.getElementById('player-choice'); //area for user to select score
+const diceList = document.getElementById('dice-list'); // area to display dice
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
 
@@ -11,7 +11,7 @@ const diceArray = diceJS;
 
 let notHeldArray = diceArray.filter(dice => !dice.isHeld);
 
-export function calculateScore(number, arrayL) {
+export function calculateScore(number, arrayL) { // formula to calculate score of about 3/5 the rolls
     let i = 3;
 
     while (i <= arrayL) {
@@ -21,39 +21,36 @@ export function calculateScore(number, arrayL) {
     return number;
 }
 
-export function displayScoringOptions() {
+export function displayScoringOptions() { // calculates scores on every roll
 
-    let possibleScoringDice = 0;
+    let possibleScoringDice = 0; // used to track if no scoring dice were rolled.  If it's still 0 at end of function then player rolled no scoring dice.
 
-    notHeldArray = diceArray.filter(dice => !dice.isHeld);
+    notHeldArray = diceArray.filter(dice => !dice.isHeld); //dice not selected by player
 
-    const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false);
+    const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false); //array of 1s,2s,3s,4s,5s, and 6s rolled
     const twosObject = diceArray.filter(dice => dice.number === 2 && dice.isHeld === false);
     const threesObject = diceArray.filter(dice => dice.number === 3 && dice.isHeld === false);
     const foursObject = diceArray.filter(dice => dice.number === 4 && dice.isHeld === false);
     const fivesObject = diceArray.filter(dice => dice.number === 5 && dice.isHeld === false);
     const sixesObject = diceArray.filter(dice => dice.number === 6 && dice.isHeld === false);
 
-    let ones = onesObject.length;
+    let ones = onesObject.length; // how many 1s, 2s, 3s, 4s, 5s, and 6s rolled
     let twos = twosObject.length;
     let threes = threesObject.length;
     let fours = foursObject.length;
     let fives = fivesObject.length;
     let sixes = sixesObject.length;
 
-    const numbersArray = [ones, twos, threes, fours, fives, sixes];
+    const numbersArray = [ones, twos, threes, fours, fives, sixes]; // used to calculate if there are three matching pairs
     const matchingPairs = numbersArray.filter(pair => pair === 2);
-    
 
     if (matchingPairs.length === 3) {
         const choice = `3 Pairs: 1500 pts`;
         renderPlayerChoice(choice, diceArray, 1500);
         possibleScoringDice++;
     }
-    //If there are three pairs of matching dice in one roll
-    
 
-    if (ones >= 3) {
+    if (ones >= 3) { //checks for three or more of certain number from here to line 98
 
         const score = calculateScore(500, ones);
         const choice = `${ones} ones: ${score} pts`;
@@ -100,12 +97,12 @@ export function displayScoringOptions() {
         possibleScoringDice++;
     }
 
-    if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) {
+    if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) { //calculate score for straight
         const choice = `Straight: 1500 pts`;
         renderPlayerChoice(choice, diceArray, 1500);
         possibleScoringDice++;
     } else {
-        if (fives === 2) {
+        if (fives === 2) {  //misc scores
             const choice = `2 fives: 100 pts`;
             renderPlayerChoice(choice, fivesObject, 100);
             possibleScoringDice++;
@@ -131,10 +128,10 @@ export function displayScoringOptions() {
 
     }
 
-    if (possibleScoringDice === 0) {
+    if (possibleScoringDice === 0) {  //player didn't roll scoring combination of dice.
         if (notHeldArray.length === 6) {
-            if (getCurrentPlayer().turnCount === 1) {
-                updateScore(0);
+            if (getCurrentPlayer().turnCount === 1) { // rolled no scoring dice on first turn
+                updateScore(500);
                 renderPlayerScores();
                 changeCurrrentPlayer();
                 renderTitle();
@@ -142,16 +139,16 @@ export function displayScoringOptions() {
                 bankZero();
                 playerChoiceDiv.innerHTML = '';
                 diceArray.forEach(die => { die.isHeld = false; });
-            } else {
+            } else { // rolled no scoring dice on turn other than first turn.   zilch
                 renderPlayerZilch();
             }
-        } else {
+        } else { // rolled zilch afer something like after scoring other die.  zilch
             renderPlayerZilch();
         }
     }
 }
 
-export function bankZero() {
+export function bankZero() { // resets local storage of bank, change DOM, disable button
 
     setBankZero();
 
@@ -161,13 +158,13 @@ export function bankZero() {
 
 }
 
-export function resetDice(one) {
+export function resetDice(one) { // makes it so user hasn't selected each dice and sets first dice to number one, second dice to number two, etc
     for (let die of diceArray) {
         die.isHeld = false;
         die.number = one;
         one++;
     }
-    diceList.innerHTML = '';
+    diceList.innerHTML = '';  // render dice on page
     for (let arrayitem of diceArray) {
         const die = document.createElement('i');
         die.classList.add('fas');
@@ -188,7 +185,7 @@ export function resetDice(one) {
     }
 }
 
-function renderPlayerZilch() {
+function renderPlayerZilch() {  //called when player gets zero scoring dice (other than first turn)
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
@@ -214,8 +211,8 @@ function renderPlayerZilch() {
     bankButton.textContent = 'Bank';
 }
 
-function renderPlayerFreeRoll() {
-    rollButton.textContent = 'Free Roll!';
+function renderPlayerFreeRoll() { // called when player has 'isHeld' class on all six dice.  gets an extra roll with all dice reset
+    rollButton.textContent = 'Free Roll!';  // cant change text to Free roll too many times
 
     for (let die of diceArray) {
         die.isHeld = false;
@@ -243,7 +240,7 @@ function renderPlayerChoice(choice, scoringDice, score) {
 
         if (isHeldArray.length === 6) {  // length is always 6..... impossible?! but reality
             renderPlayerFreeRoll();
-            rollButton.textContent = 'Free Roll!';
+            rollButton.textContent = 'Free Roll!';  // just incase function renderPlayerFreeRoll() fails to change text
         }
 
         increaseBank(score);
@@ -261,7 +258,7 @@ function renderPlayerChoice(choice, scoringDice, score) {
 
 }
 
-export function checkLastRound() {
+export function checkLastRound() { // check to see if either player has reach winning score. is so redirect to results page
 
     const players = getPlayers();
 
@@ -284,11 +281,11 @@ export function checkLastRound() {
 
 }
 
-const generateRandomNumber = function () {
+const generateRandomNumber = function () {  //generates random number 1-6 for each dice
     return Math.floor((Math.random() * 6) + 1);
 };
 
-export function renderDiceValue(array) {
+export function renderDiceValue(array) { //always passed dice array
     diceList.innerHTML = '';
     const currentRoll = [];
     for (let arrayitem of array) {
@@ -303,9 +300,9 @@ export function renderDiceValue(array) {
 
         } if (arrayitem.isHeld) {
             die.classList.add('held');
-        } if (arrayitem.isHeld === false) {
-            die.classList.add('notHeld');
-        }
+        } //if (arrayitem.isHeld === false) {
+        //     die.classList.add('notHeld');
+        // }
 
         currentRoll.push(arrayitem.number);
         if (arrayitem.number === 1) {
@@ -325,7 +322,7 @@ export function renderDiceValue(array) {
     }
 }
 
-export function disableRoll(boolean) {
+export function disableRoll(boolean) {  //called once to disable roll button. ROLL model function.
     rollButton.disabled = boolean;
 }
 
