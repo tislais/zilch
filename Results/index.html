@@ -5,40 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
+    <link rel="stylesheet" href="../styles/home.css">
+    <title>Zilch Results</title>
 </head>
 
 <body>
-    <h1>Winner: <span></span></h1> <!-- Space to dynamically put in winers and losers name-->
-
-    <table>
-        <thead>
-            <tr>
-                <td></td>
-                <td>Turns</td>
-                <!--Stays Blank-->
-                <td>Zilches</td>
-                <td>Total Score</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td id="p1-name"></td>
-                <td id="p1-turns"></td>
-                <td id="p1-zilches"></td>
-                <td id="p1-score"></td>
-            </tr>
-            <tr>
-                <td id="p2-name"></td>
-                <td id="p2-turns"></td>
-                <td id="p2-zilches"></td>
-                <td id="p2-score"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <button>Play Again</button>
-
+    <div class="wrap">
+        <div class="results">
+            <h1><span></span> wins!</h1> <!-- Space to dynamically put in winers and losers name-->
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>Turns</td>
+                        <!--Stays Blank-->
+                        <td>Zilches</td>
+                        <td>Total Score</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="p1-name"></td>
+                        <td id="p1-turns"></td>
+                        <td id="p1-zilches"></td>
+                        <td id="p1-score"></td>
+                    </tr>
+                    <tr>
+                        <td id="p2-name"></td>
+                        <td id="p2-turns"></td>
+                        <td id="p2-zilches"></td>
+                        <td id="p2-score"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Play Again</button>
+        </div>
+    </div>
     <script type="module" src="./results.js"></script>
 
 </body>
