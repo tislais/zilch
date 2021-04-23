@@ -1,5 +1,6 @@
 
 import { getPlayers, getCurrentPlayer } from '../local-storage-utils.js';
+import { addNotHeldClass } from './score.js';
 
 const playerOneTable = document.getElementById('player-one-table');
 const playerTwoTable = document.getElementById('player-two-table');
@@ -68,7 +69,6 @@ export function renderZilch() {
     if (playerTwo.turn === true) {
         if (player.zilchRun === 3) {
             newTr.append(thirdZilchTd, playerRoundScore);
-            console.log('third zilch');
         } else {
             newTr.append(zilchText, playerRoundScore);
         }

@@ -38,7 +38,7 @@ bankButton.addEventListener('click', () => {
     changeCurrrentPlayer();
     renderTitle();
     checkLastRound();
-    resetDice(1);
+    //resetDice(1);
     bankZero();
     playerChoiceDiv.innerHTML = '';
     dice.forEach(die => { die.isHeld = false; });
