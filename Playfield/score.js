@@ -43,7 +43,7 @@ export function displayScoringOptions() {
 
     const numbersArray = [ones, twos, threes, fours, fives, sixes];
     const matchingPairs = numbersArray.filter(pair => pair === 2);
-    
+
 
     if (matchingPairs.length === 3) {
         const choice = `3 Pairs: 1500 pts`;
@@ -51,7 +51,7 @@ export function displayScoringOptions() {
         possibleScoringDice++;
     }
     //If there are three pairs of matching dice in one roll
-    
+
 
     if (ones >= 3) {
 
@@ -192,7 +192,7 @@ function renderPlayerZilch() {
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
-    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 1);
+    setTimeout(function () { zilchText.classList.add('zilch-text-animate'); }, 1);
     playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;
