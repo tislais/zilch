@@ -19,8 +19,6 @@ _Questions or comments can be directed to [Angel Ortiz](https://github.com/Angel
 * _Vanilla JavaScript_
 * _HTML_
 * _CSS_
-* _Web Audio API_
-
 
 ### License
 
