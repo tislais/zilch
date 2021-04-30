@@ -1,4 +1,4 @@
-# _Aurora Synth_
+# _Zilch_
 
 #### By _**Angel Ortiz, Keven Ruiz, Tis Lais, and Tucker Hoog**_ 
 
