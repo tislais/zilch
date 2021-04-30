@@ -189,7 +189,7 @@ function renderPlayerZilch() {  //called when player gets zero scoring dice (oth
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
-    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 500);
+    setTimeout(function () { zilchText.classList.add('zilch-text-animate'); }, 500);
     playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;
@@ -280,7 +280,7 @@ export function checkLastRound() { // check to see if either player has reach wi
     }
 }
 
-const generateRandomNumber = function() {  //generates random number 1-6 for each dice
+const generateRandomNumber = function () {  //generates random number 1-6 for each dice
     return Math.floor((Math.random() * 6) + 1);
 };
 
@@ -293,7 +293,7 @@ export function renderDiceValue(array) { //always passed dice array
 
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
-            setTimeout(function() { die.classList.add('roll'); }, 1);
+            setTimeout(function () { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
 
