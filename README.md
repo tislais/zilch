@@ -4,7 +4,7 @@
 
 ## Description
 
-Zilch is a browser game built in a 5 day sprint using pure Vanilla JavaScript, HTML, and CSS. The user has the ability to play the two players to a goal set by the users. Two players take turns making calculated risks based on random rolls of the dice to be the first player to the set goal. 
+Zilch is a browser game built in a 5 day sprint using pure Vanilla JavaScript, HTML, and CSS. Two players take turns making calculated risks based on random rolls of the dice to be the first player to the set goal. 
 
 
 _View via [GitHub Pages](https://tislais.github.io/zilch/)._
