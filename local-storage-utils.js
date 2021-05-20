@@ -33,31 +33,21 @@ export function getWinningScore() {  // gets local storage and returns array
     return parsedScore;
 }
 
+const makeInitialPlayer = (name, turn) => ({
+    name,
+    turn,
+    roundScore: 0,
+    score: 0,
+    zilches: 0,
+    turnCount: 0,
+    diceroll: 0,
+    zilchRun: 0,
+    bank: 0
+});
+
 export function createPlayers(nameOne, nameTwo) {
-    const playerOne = {
-
-        name: nameOne,
-        roundScore: 0,
-        score: 0,
-        zilches: 0,
-        turnCount: 0,
-        diceroll: 0,
-        turn: true,
-        zilchRun: 0,
-        bank: 0
-    };
-
-    const playerTwo = {
-        name: nameTwo,
-        roundScore: 0,
-        score: 0,
-        zilches: 0,
-        turnCount: 0,
-        diceroll: 0,
-        turn: false,
-        zilchRun: 0,
-        bank: 0
-    };
+    const playerOne = makeInitialPlayer(nameOne, true); 
+    const playerTwo = makeInitialPlayer(nameTwo, false); 
 
     const players = [playerOne, playerTwo];
 
@@ -70,15 +60,13 @@ export function updateScore(playerScore) {
 
     const playerName = getCurrentPlayer().name; //thanks tis
 
-    if (players[0].name === playerName) {
-        players[0].score += playerScore;
-        players[0].roundScore = playerScore;
-        players[0].turnCount += 1;
-    }
-    if (players[1].name === playerName) {
-        players[1].score += playerScore;
-        players[1].roundScore = playerScore;
-        players[1].turnCount += 1;
+    // should do the trick
+    for (let player of players) {
+        if (player.name === playerName) {
+            player.score += playerScore;
+            player.roundScore = playerScore;
+            player.turnCount += 1;
+        }
     }
 
     setPlayers(players);
@@ -91,14 +79,13 @@ export function clearZilchRun() {
 
     const playerName = getCurrentPlayer().name;
 
-    if (players[0].name === playerName) {
-        players[0].zilchRun = 0;
-
+    // again, seems like a loop should work, unless i'm missing something
+    for (let player of players) {
+        if (player.name === playerName) {
+            player.zilchRun = 0;
+        }
     }
-    if (players[1].name === playerName) {
-        players[1].zilchRun = 0;
 
-    }
 
     setPlayers(players);
 }
@@ -108,15 +95,12 @@ export function updateZilch() {
     const players = getPlayers();
 
     const playerName = getCurrentPlayer().name;
-
-    if (players[0].name === playerName) {
-        players[0].zilches = players[0].zilches + 1;
-        players[0].zilchRun = players[0].zilchRun + 1;
-    }
-    if (players[1].name === playerName) {
-        players[1].zilches = players[1].zilches + 1;
-        players[1].zilchRun = players[1].zilchRun + 1;
-
+    
+    for (let player of players) {
+        if (player.name === playerName) {
+            player.zilches = player.zilches + 1;
+            player.zilchRun = player.zilchRun + 1;
+        }
     }
 
     setPlayers(players);
@@ -137,7 +121,7 @@ export function getCurrentPlayer() {
     const players = getPlayers();
 
     for (let player of players) {
-        if (player.turn === true) return player;
+        if (player.turn) return player;
     }
 }
 
@@ -147,13 +131,10 @@ export function setBankZero() {
 
     const playerName = getCurrentPlayer().name;
 
-    if (players[0].name === playerName) {
-        players[0].bank = 0;
-
-    }
-    if (players[1].name === playerName) {
-        players[1].bank = 0;
-
+    for (let player of players) {
+        if (player.name === playerName) {
+            player.bank = 0;
+        }
     }
 
     setPlayers(players);
@@ -166,12 +147,12 @@ export function increaseBank(score) {
 
     const playerName = getCurrentPlayer().name; //thanks tis
 
-    if (players[0].name === playerName) {
-        players[0].bank = players[0].bank + score;
+    for (let player of players) {
+        if (player.name === playerName) {
+            player.bank = player.bank + score;
+        }
     }
-    if (players[1].name === playerName) {
-        players[1].bank = players[1].bank + score;
-    }
+
 
     setPlayers(players);
 

@@ -21,18 +21,21 @@ export function calculateScore(number, arrayL) { // formula to calculate score o
     return number;
 }
 
+const filterNumber = (dice, number) => diceArray.filter(dice => dice.number === number && dice.isHeld === false);
+
 export function displayScoringOptions() { // calculates scores on every roll
 
     let possibleScoringDice = 0; // used to track if no scoring dice were rolled.  If it's still 0 at end of function then player rolled no scoring dice.
 
     notHeldArray = diceArray.filter(dice => !dice.isHeld); //dice not selected by player
 
-    const onesObject = diceArray.filter(dice => dice.number === 1 && dice.isHeld === false); //array of 1s,2s,3s,4s,5s, and 6s rolled
-    const twosObject = diceArray.filter(dice => dice.number === 2 && dice.isHeld === false);
-    const threesObject = diceArray.filter(dice => dice.number === 3 && dice.isHeld === false);
-    const foursObject = diceArray.filter(dice => dice.number === 4 && dice.isHeld === false);
-    const fivesObject = diceArray.filter(dice => dice.number === 5 && dice.isHeld === false);
-    const sixesObject = diceArray.filter(dice => dice.number === 6 && dice.isHeld === false);
+    // we could use a map to make the even more concise
+    const onesObject = filterNumber(diceArray, 1); 
+    const twosObject = filterNumber(diceArray, 2); 
+    const threesObject = filterNumber(diceArray, 3); 
+    const foursObject = filterNumber(diceArray, 4); 
+    const fivesObject = filterNumber(diceArray, 5); 
+    const sixesObject = filterNumber(diceArray, 6); 
 
     let ones = onesObject.length; // how many 1s, 2s, 3s, 4s, 5s, and 6s rolled
     let twos = twosObject.length;
@@ -50,52 +53,16 @@ export function displayScoringOptions() { // calculates scores on every roll
         possibleScoringDice++;
     }
 
-    if (ones >= 3) { //checks for three or more of certain number from here to line 98
+    // this loop should replace a lot of duplicate code
+    numbersArray.forEach((item, i) => {
+        if (item >= 3) { //checks for three or more of certain number from here to line 98
 
-        const score = calculateScore(500, ones);
-        const choice = `${ones} ones: ${score} pts`;
-        renderPlayerChoice(choice, onesObject, score);
-        possibleScoringDice++;
-    }
-
-    if (twos >= 3) {
-
-        const score = calculateScore(100, twos);
-        const choice = `${twos} twos: ${score} pts`;
-        renderPlayerChoice(choice, twosObject, score);
-        possibleScoringDice++;
-    }
-
-    if (threes >= 3) {
-
-        const score = calculateScore(150, threes);
-        const choice = `${threes} threes: ${score} pts`;
-        renderPlayerChoice(choice, threesObject, score);
-        possibleScoringDice++;
-    }
-
-    if (fours >= 3) {
-
-        const score = calculateScore(200, fours);
-        const choice = `${fours} fours: ${score} pts`;
-        renderPlayerChoice(choice, foursObject, score);
-        possibleScoringDice++;
-    }
-
-    if (fives >= 3) {
-
-        const score = calculateScore(250, fives);
-        const choice = `${fives} fives: ${score} pts`;
-        renderPlayerChoice(choice, fivesObject, score);
-        possibleScoringDice++;
-    }
-
-    if (sixes >= 3) {
-        const score = calculateScore(300, sixes);
-        const choice = `${sixes} sixes: ${score} pts`;
-        renderPlayerChoice(choice, sixesObject, score);
-        possibleScoringDice++;
-    }
+            const score = calculateScore(500, item);
+            const choice = `${item} ${i + 1}s: ${score} pts`;
+            renderPlayerChoice(choice, filterNumber(diceArray, i + 1), score);
+            possibleScoringDice++;
+        }
+    });
 
     if (ones === 1 && twos === 1 && threes === 1 && fours === 1 && fives === 1 && sixes === 1) { //calculate score for straight
         const choice = `Straight: 1500 pts`;
@@ -164,32 +131,13 @@ export function resetDice(one) { // makes it so user hasn't selected each dice a
         die.number = one;
         one++;
     }
-    // diceList.innerHTML = '';  // render dice on page
-    // for (let arrayitem of diceArray) {
-    //     const die = document.createElement('i');
-    //     die.classList.add('fas');
-    //     if (arrayitem.number === 1) {
-    //         die.classList.add('fa-dice-one');
-    //     } else if (arrayitem.number === 2) {
-    //         die.classList.add('fa-dice-two');
-    //     } else if (arrayitem.number === 3) {
-    //         die.classList.add('fa-dice-three');
-    //     } else if (arrayitem.number === 4) {
-    //         die.classList.add('fa-dice-four');
-    //     } else if (arrayitem.number === 5) {
-    //         die.classList.add('fa-dice-five');
-    //     } else if (arrayitem.number === 6) {
-    //         die.classList.add('fa-dice-six');
-    //     }
-    //     diceList.append(die);
-    // }
 }
 
 function renderPlayerZilch() {  //called when player gets zero scoring dice (other than first turn)
     const zilchText = document.createElement('div');
     zilchText.textContent = 'Zilch!';
     zilchText.classList.add('zilch-text');
-    setTimeout(function () { zilchText.classList.add('zilch-text-animate'); }, 500);
+    setTimeout(function() { zilchText.classList.add('zilch-text-animate'); }, 500);
     playerChoiceDiv.append(zilchText);
     bankButton.disabled = true;
     rollButton.disabled = false;
@@ -268,19 +216,16 @@ export function checkLastRound() { // check to see if either player has reach wi
     const winnerScore = getWinningScore();
 
     if (playerOne.score >= winnerScore || playerTwo.score >= winnerScore) {
-        if (playerOne.score >= winnerScore) {
-            playerOne.lastRound = true;
-            window.location = '../Results/';
-        }
-
-        if (playerTwo.score >= winnerScore) {
-            playerTwo.lastRound = true;
-            window.location = '../Results';
+        for (let player of players) {
+            if (player.score >= winnerScore) {
+                player.lastRound = true;
+                window.location = '../Results/';
+            }
         }
     }
 }
 
-const generateRandomNumber = function () {  //generates random number 1-6 for each dice
+const generateRandomNumber = function() {  //generates random number 1-6 for each dice
     return Math.floor((Math.random() * 6) + 1);
 };
 
@@ -293,7 +238,7 @@ export function renderDiceValue(array) { //always passed dice array
 
         die.setAttribute('id', arrayitem.id);
         if (!arrayitem.isHeld) {
-            setTimeout(function () { die.classList.add('roll'); }, 1);
+            setTimeout(function() { die.classList.add('roll'); }, 1);
             die.classList.remove('roll');
             arrayitem.number = generateRandomNumber();
 
@@ -305,7 +250,7 @@ export function renderDiceValue(array) { //always passed dice array
 
         currentRoll.push(arrayitem.number);
         if (arrayitem.number === 1) {
-            die.classList.add('fa-dice-one');
+            die.classList.add('fa-dice-one'); // it would probably be nice to just use the number instead of the word, so you could just use a loop: `die.classList.add('fa-dice-${i}')``
         } else if (arrayitem.number === 2) {
             die.classList.add('fa-dice-two');
         } else if (arrayitem.number === 3) {

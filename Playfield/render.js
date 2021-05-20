@@ -8,8 +8,8 @@ const title = document.querySelector('span');
 
 export function renderPlayerScores() {
 
-    let playerOne = getPlayers()[0];
-    let playerTwo = getPlayers()[1];
+    // you could use destructuring here like so
+    let [playerOne, playerTwo] = getPlayers();
 
     let player = getCurrentPlayer();
 
@@ -35,13 +35,10 @@ export function renderPlayerScores() {
 }
 
 export function renderZilch() {
+    const players = getPlayers();
+    const currentPlayer = getCurrentPlayer();
 
-    const playerOne = getPlayers()[0];
-    const playerTwo = getPlayers()[1];
-
-    const player = getCurrentPlayer();
-
-    let totalScore = player.score;
+    let totalScore = currentPlayer.score;
 
     const newTr = document.createElement('tr');
     const zilchText = document.createElement('td');
@@ -54,26 +51,19 @@ export function renderZilch() {
     zilchText.textContent = 'ZILCH!';
     playerRoundScore.textContent = totalScore;
     playerTotalScore.textContent = '-500';
-
-    if (playerOne.turn === true) {
-        if (player.zilchRun === 3) {
-            newTr.append(thirdZilchTd, playerRoundScore);
-        } else {
-            newTr.append(zilchText, playerRoundScore);
+    const tables = [playerOneTable, playerTwoTable];
+    // you could use a loop here as well
+    players.forEach((player, i) => {
+        if (player.turn === true) {
+            if (player.zilchRun === 3) {
+                newTr.append(thirdZilchTd, playerRoundScore);
+            } else {
+                newTr.append(zilchText, playerRoundScore);
+            }
+            tables[i].append(newTr);
+    
         }
-        playerOneTable.append(newTr);
-
-    }
-
-    if (playerTwo.turn === true) {
-        if (player.zilchRun === 3) {
-            newTr.append(thirdZilchTd, playerRoundScore);
-        } else {
-            newTr.append(zilchText, playerRoundScore);
-        }
-        playerTwoTable.append(newTr);
-
-    }
+    });
 }
 
 export function renderTitle() {
