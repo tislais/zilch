@@ -1,7 +1,7 @@
 import { renderTitle, renderPlayerScores } from './render.js';
 import { updateScore, clearZilchRun, changeCurrrentPlayer, getCurrentPlayer, getPlayers } from '../local-storage-utils.js';
 import { checkLastRound, resetDice, bankZero, renderDiceValue, displayScoringOptions } from './score.js';
-import diceJS from './dice.js';
+import dice from './dice.js';
 
 const bankButton = document.getElementById('bank-button');
 const rollButton = document.getElementById('roll-button');
@@ -18,8 +18,6 @@ const player2Name = document.getElementById('player-2-name');
 
 const playerChoiceDiv = document.getElementById('player-choice');
 
-let dice = diceJS;
-
 let players = getPlayers();
 
 renderTitle();
@@ -32,6 +30,7 @@ resetDice(1);
 bankButton.disabled = true;
 
 bankButton.addEventListener('click', () => {
+    // such an awesome compose function! amazing work here!!
     updateScore(getCurrentPlayer().bank);
     renderPlayerScores();
     clearZilchRun();

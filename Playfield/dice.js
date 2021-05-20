@@ -1,3 +1,5 @@
+// nice data model!
+
 export default [
     {
         id: 'die1',
